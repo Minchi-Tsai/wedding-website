@@ -68,8 +68,8 @@ export const rsvp = (() => {
         });
 
         alertWrapper.innerHTML = alertMarkup('info', lang
-            .on('zh-tw', '<strong>請稍候！</strong> 正在送出您的回覆...')
-            .on('en', '<strong>Just a moment!</strong> Submitting your RSVP...')
+            .on('zh-tw', '<i class="fa-solid fa-spinner fa-spin me-2"></i><strong>請稍候！</strong> 正在送出您的回覆...')
+            .on('en', '<i class="fa-solid fa-spinner fa-spin me-2"></i><strong>Just a moment!</strong> Sending your RSVP...')
             .get());
 
         try {

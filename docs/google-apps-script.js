@@ -120,7 +120,9 @@ function findGuest(submittedName) {
 
   if (!guestSheet) return null;
 
-  var data = guestSheet.getDataRange().getValues();
+  var lastRow = guestSheet.getLastRow();
+  if (lastRow < 2) return null;
+  var data = guestSheet.getRange(1, 1, lastRow, 2).getValues();
   var sub = normalize(submittedName);
 
   // Skip header row (index 0)
