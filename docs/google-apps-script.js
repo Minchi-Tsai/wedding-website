@@ -1,26 +1,141 @@
 /**
- * Google Apps Script for Wedding RSVP
+ * Google Apps Script for Wedding RSVP with Guest List Validation
+ *
+ * SHEET STRUCTURE (two tabs in the same workbook):
+ *
+ * Tab "Guest List" columns:
+ *   A: First Name(s)  — for couples use "David & Minchi"
+ *   B: Last Name(s)
+ *   C: Address
+ *   D: Email
+ *   E: Invited by
+ *   F: Invitation
+ *   G: Response        — auto-updated by this script ("Attending" / "Not Attending")
+ *   H: Table #
+ *   I: Notes
+ *
+ * Tab "RSVP" columns (auto-filled by website):
+ *   A: Timestamp
+ *   B: Name
+ *   C: Email
+ *   D: Attendance
+ *   E: Guest Count
+ *   F: Message
+ *   G: Verified        — "YES" if matched guest list, "UNVERIFIED" if not
+ *   H: Matched Guest   — the matched name from guest list (for reference)
  *
  * SETUP:
- * 1. Create a Google Sheet with columns: Timestamp | Name | Email | Attendance | Guest Count | Message
- * 2. Open Extensions > Apps Script
+ * 1. Create both tabs with headers above
+ * 2. Open Extensions > Apps Script from the spreadsheet
  * 3. Paste this code
- * 4. Deploy > New deployment > Web app
- *    - Execute as: Me
- *    - Who has access: Anyone
- * 5. Copy the web app URL and set it as data-rsvp-url in index.html
+ * 4. Deploy > New deployment > Web app (Execute as: Me, Access: Anyone)
+ * 5. Copy the web app URL → set as data-rsvp-url in index.html
  *
- * OPTIONAL: reCAPTCHA v3 validation
- * - Set RECAPTCHA_SECRET_KEY below with your secret key
- * - If left empty, reCAPTCHA validation is skipped
+ * REDEPLOY after changes:
+ * Deploy > Manage deployments > Edit (pencil) > Version: New version > Deploy
  */
 
-const RECAPTCHA_SECRET_KEY = ''; // Your reCAPTCHA v3 secret key (optional)
-const RECAPTCHA_THRESHOLD = 0.5; // Score threshold (0.0 = bot, 1.0 = human)
+const RECAPTCHA_SECRET_KEY = '';
+const RECAPTCHA_THRESHOLD = 0.5;
+
+// Sheet tab names — update if you rename them
+const GUEST_LIST_TAB = 'Guest List';
+const RSVP_TAB = 'RSVP';
+
+// Column index for "Response" in Guest List (G = 7)
+const RESPONSE_COL = 7;
+
+/**
+ * Normalize a string for fuzzy comparison.
+ * Lowercase, trim, collapse whitespace.
+ * @param {string} s
+ * @returns {string}
+ */
+function normalize(s) {
+  return (s || '').toLowerCase().trim().replace(/\s+/g, ' ');
+}
+
+/**
+ * Split a couple field like "David & Minchi" or "David and Minchi"
+ * into individual names.
+ * @param {string} s
+ * @returns {string[]}
+ */
+function splitNames(s) {
+  return s.split(/\s*[&＆]\s*|\s+and\s+/i).map(function(n) { return normalize(n); }).filter(Boolean);
+}
+
+/**
+ * Fuzzy match a submitted name against a guest list entry.
+ * @param {string} submitted — normalized submitted name
+ * @param {string} firstNames — raw First Name(s) from guest list
+ * @param {string} lastNames — raw Last Name(s) from guest list
+ * @returns {boolean}
+ */
+function fuzzyMatch(submitted, firstNames, lastNames) {
+  var fn = normalize(firstNames);
+  var ln = normalize(lastNames);
+
+  // Build full name variations
+  var fullName = (fn + ' ' + ln).trim();
+  var fullNameReversed = (ln + ' ' + fn).trim();
+
+  // 1. Exact full name match
+  if (submitted === fullName || submitted === fullNameReversed) return true;
+
+  // 2. First name only match
+  if (submitted === fn) return true;
+
+  // 3. Last name + any first name match (for couples)
+  var individuals = splitNames(firstNames);
+  for (var i = 0; i < individuals.length; i++) {
+    var name = individuals[i];
+    if (submitted === name) return true;
+    if (submitted === name + ' ' + normalize(lastNames)) return true;
+    if (submitted === normalize(lastNames) + ' ' + name) return true;
+    // Substring: submitted contains individual or individual contains submitted
+    if (submitted.length >= 2 && name.indexOf(submitted) >= 0) return true;
+    if (name.length >= 2 && submitted.indexOf(name) >= 0) return true;
+  }
+
+  // 4. Substring match on full name (handles Chinese names like "小明" matching "王小明")
+  if (submitted.length >= 2 && fullName.indexOf(submitted) >= 0) return true;
+  if (fullName.length >= 2 && submitted.indexOf(fullName) >= 0) return true;
+
+  return false;
+}
+
+/**
+ * Find a matching guest in the Guest List tab.
+ * @param {string} submittedName
+ * @returns {{ row: number, name: string }|null} — row number (1-indexed) and display name, or null
+ */
+function findGuest(submittedName) {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var guestSheet = ss.getSheetByName(GUEST_LIST_TAB);
+
+  if (!guestSheet) return null;
+
+  var data = guestSheet.getDataRange().getValues();
+  var sub = normalize(submittedName);
+
+  // Skip header row (index 0)
+  for (var i = 1; i < data.length; i++) {
+    var firstNames = String(data[i][0] || '');
+    var lastNames = String(data[i][1] || '');
+
+    if (fuzzyMatch(sub, firstNames, lastNames)) {
+      var displayName = (firstNames + ' ' + lastNames).trim();
+      return { row: i + 1, name: displayName }; // +1 because sheet rows are 1-indexed
+    }
+  }
+
+  return null;
+}
 
 function doPost(e) {
   try {
-    const params = e.parameter;
+    var params = e.parameter;
 
     // Validate required fields
     if (!params.name || params.name.trim().length === 0) {
@@ -29,36 +144,53 @@ function doPost(e) {
 
     // Validate reCAPTCHA if configured
     if (RECAPTCHA_SECRET_KEY && RECAPTCHA_SECRET_KEY.length > 0) {
-      const token = params.recaptcha_token || '';
+      var token = params.recaptcha_token || '';
       if (!token) {
         return jsonResponse({ result: 'error', message: 'Security verification failed.' });
       }
 
-      const verifyUrl = 'https://www.google.com/recaptcha/api/siteverify';
-      const response = UrlFetchApp.fetch(verifyUrl, {
+      var verifyUrl = 'https://www.google.com/recaptcha/api/siteverify';
+      var response = UrlFetchApp.fetch(verifyUrl, {
         method: 'post',
-        payload: {
-          secret: RECAPTCHA_SECRET_KEY,
-          response: token,
-        },
+        payload: { secret: RECAPTCHA_SECRET_KEY, response: token },
       });
 
-      const captchaResult = JSON.parse(response.getContentText());
+      var captchaResult = JSON.parse(response.getContentText());
       if (!captchaResult.success || captchaResult.score < RECAPTCHA_THRESHOLD) {
         return jsonResponse({ result: 'error', message: 'Security verification failed.' });
       }
     }
 
-    // Append row to the active sheet
-    const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-    sheet.appendRow([
-      new Date(),                           // Timestamp
-      params.name.trim(),                   // Name
-      (params.email || '').trim(),          // Email
-      (params.attendance || 'yes'),         // Attendance (yes/no)
-      parseInt(params.guest_count) || 1,    // Guest Count
-      (params.message || '').trim(),        // Message
+    // Match against guest list
+    var match = findGuest(params.name);
+    var verified = match ? 'YES' : 'UNVERIFIED';
+    var matchedName = match ? match.name : '';
+    var attendance = params.attendance || 'yes';
+
+    // Append RSVP row
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var rsvpSheet = ss.getSheetByName(RSVP_TAB);
+    if (!rsvpSheet) {
+      return jsonResponse({ result: 'error', message: 'RSVP sheet not found. Please contact the couple.' });
+    }
+
+    rsvpSheet.appendRow([
+      new Date(),
+      params.name.trim(),
+      (params.email || '').trim(),
+      attendance,
+      parseInt(params.guest_count) || 1,
+      (params.message || '').trim(),
+      verified,
+      matchedName,
     ]);
+
+    // Update Response column in Guest List if matched
+    if (match) {
+      var guestSheet = ss.getSheetByName(GUEST_LIST_TAB);
+      var responseValue = attendance === 'yes' ? 'Attending' : 'Not Attending';
+      guestSheet.getRange(match.row, RESPONSE_COL).setValue(responseValue);
+    }
 
     return jsonResponse({ result: 'success', message: 'RSVP received!' });
 
@@ -73,7 +205,6 @@ function jsonResponse(data) {
     .setMimeType(ContentService.MimeType.JSON);
 }
 
-// Handle CORS preflight (GET requests)
 function doGet() {
   return jsonResponse({ result: 'ok', message: 'RSVP endpoint is active.' });
 }
