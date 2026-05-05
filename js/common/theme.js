@@ -38,6 +38,7 @@ export const theme = (() => {
      * @returns {void}
      */
     const setMetaTheme = (listTheme) => {
+        if (!metaTheme) return;
         const now = metaTheme.getAttribute('content');
         metaTheme.setAttribute('content', listTheme.some((i) => i === now) ? themeColors[now] : now);
     };
@@ -94,7 +95,7 @@ export const theme = (() => {
                 ? isDarkMode(themeDark[0], themeLight[0])
                 : isDarkMode(themeDark[1], themeLight[1]);
 
-            metaTheme.setAttribute('content', themeColor);
+            if (metaTheme) metaTheme.setAttribute('content', themeColor);
         });
 
         const observerTop = new IntersectionObserver(callback, { rootMargin: '0% 0% -95% 0%' });
@@ -107,6 +108,18 @@ export const theme = (() => {
     const init = () => {
         themes = storage('theme');
         metaTheme = document.querySelector('meta[name="theme-color"]');
+
+        // Retry after DOM is ready if meta tag wasn't found yet
+        if (!metaTheme) {
+            const retry = () => {
+                metaTheme = document.querySelector('meta[name="theme-color"]');
+            };
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', retry);
+            } else {
+                retry();
+            }
+        }
 
         if (!themes.has('active')) {
             window.matchMedia('(prefers-color-scheme: dark)').matches ? setDark() : setLight();
