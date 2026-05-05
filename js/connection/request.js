@@ -32,7 +32,8 @@ export const pool = (() => {
          */
         getInstance: (name) => {
             if (!cachePool || !cachePool.has(name)) {
-                throw new Error(`please init cache first: ${name}`);
+                console.warn(`Cache not initialized: ${name}`);
+                return null;
             }
 
             return cachePool.get(name);
@@ -58,7 +59,10 @@ export const pool = (() => {
             }
 
             cachePool = new Map();
-            Promise.all(lists.concat([cacheRequest]).map((v) => window.caches.open(v).then((c) => cachePool.set(v, c)))).then(() => callback());
+            Promise.all(lists.concat([cacheRequest]).map((v) => window.caches.open(v).then((c) => cachePool.set(v, c)))).then(() => callback()).catch((err) => {
+                console.error('Cache init failed:', err);
+                callback();
+            });
         },
     };
 })();
@@ -67,7 +71,12 @@ export const pool = (() => {
  * @param {string} cacheName 
  */
 export const cacheWrapper = (cacheName) => {
-    const cacheObject = pool.getInstance(cacheName);
+    let cacheObject = null;
+    try {
+        cacheObject = pool.getInstance(cacheName);
+    } catch {
+        // Cache not available
+    }
 
     /**
      * @param {string|URL} input 
@@ -76,7 +85,11 @@ export const cacheWrapper = (cacheName) => {
      * @param {number} ttl
      * @returns {Promise<Response>}
      */
-    const set = (input, res, forceCache, ttl) => res.clone().arrayBuffer().then((ab) => {
+    const set = (input, res, forceCache, ttl) => {
+        if (!cacheObject) {
+            return Promise.resolve(res);
+        }
+        return res.clone().arrayBuffer().then((ab) => {
         if (!res.ok) {
             return res;
         }
@@ -107,12 +120,17 @@ export const cacheWrapper = (cacheName) => {
 
         return cacheObject.put(input, new Response(ab, { headers })).then(() => res);
     });
+    };
 
     /**
      * @param {string|URL} input 
      * @returns {Promise<Response|null>}
      */
-    const has = (input) => cacheObject.match(input).then((res) => {
+    const has = (input) => {
+        if (!cacheObject) {
+            return Promise.resolve(null);
+        }
+        return cacheObject.match(input).then((res) => {
         if (!res) {
             return null;
         }
@@ -122,12 +140,18 @@ export const cacheWrapper = (cacheName) => {
 
         return Date.now() > expTime ? null : res;
     });
+    };
 
     /**
-     * @param {string|URL} input 
+     * @param {string|URL} input
      * @returns {Promise<boolean>}
      */
-    const del = (input) => cacheObject.delete(input);
+    const del = (input) => {
+        if (!cacheObject) {
+            return Promise.resolve(false);
+        }
+        return cacheObject.delete(input);
+    };
 
     return {
         set,
