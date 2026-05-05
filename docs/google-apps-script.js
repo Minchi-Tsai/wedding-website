@@ -38,6 +38,10 @@
 const RECAPTCHA_SECRET_KEY = '';
 const RECAPTCHA_THRESHOLD = 0.5;
 
+// Spreadsheet ID — from your Google Sheet URL
+const SPREADSHEET_ID = '1_-1EVtzeWGZvs_jTyIA3hKVj7vrTjyz847tfOIwTEXM';
+const SS = SpreadsheetApp.openById(SPREADSHEET_ID);
+
 // Sheet tab names — update if you rename them
 const GUEST_LIST_TAB = 'Guest List';
 const RSVP_TAB = 'RSVP';
@@ -111,7 +115,7 @@ function fuzzyMatch(submitted, firstNames, lastNames) {
  * @returns {{ row: number, name: string }|null} — row number (1-indexed) and display name, or null
  */
 function findGuest(submittedName) {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var ss = SS;
   var guestSheet = ss.getSheetByName(GUEST_LIST_TAB);
 
   if (!guestSheet) return null;
@@ -168,7 +172,7 @@ function doPost(e) {
     var attendance = params.attendance || 'yes';
 
     // Append RSVP row
-    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var ss = SS;
     var rsvpSheet = ss.getSheetByName(RSVP_TAB);
     if (!rsvpSheet) {
       return jsonResponse({ result: 'error', message: 'RSVP sheet not found. Please contact the couple.' });
