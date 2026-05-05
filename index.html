@@ -515,72 +515,18 @@
         </div>
     </div>
 
-    <!-- Welcome Page — Sealed Letter -->
-    <div class="loading-page" id="welcome" style="opacity: 0; background: #f0ebe3;">
+    <!-- Welcome Page -->
+    <div class="loading-page bg-white-black" id="welcome" style="opacity: 0;">
         <div class="d-flex justify-content-center align-items-center vh-100 overflow-y-auto">
-            <div class="d-flex flex-column align-items-center text-center" style="max-width: 380px; width: 92%;">
+            <div class="d-flex flex-column text-center">
+                <h2 class="font-esthetic mb-4" style="font-size: 2.25rem;">The Wedding Of</h2>
 
-                <!-- Title -->
-                <p style="font-size: 0.75rem; letter-spacing: 0.2rem; color: #9e9484; margin-bottom: 0.75rem; text-transform: uppercase;">You've Got Mail From</p>
-                <h2 class="font-esthetic" style="font-size: 2.5rem; color: #5c4a3a; margin-bottom: 1.5rem;">Minchi &amp; David</h2>
+                <img src="./assets/images/placeholder.webp" data-src="./assets/images/bg.webp" alt="background" class="img-center-crop rounded-circle border border-3 border-light shadow mb-4 mx-auto">
 
-                <!-- Kraft envelope -->
-                <div style="position: relative; width: 100%; aspect-ratio: 4/3; max-width: 340px;">
+                <h2 class="font-esthetic mb-4" style="font-size: 2.25rem;">Minchi &amp; David</h2>
+                <div id="guest-name" data-message="Dear / 親愛的"></div>
 
-                    <!-- Envelope body -->
-                    <div style="position: absolute; inset: 10% 0 0 0; background: linear-gradient(160deg, #b8a472 0%, #a69358 30%, #97843e 60%, #8a7735 100%); border-radius: 0.5rem; box-shadow: 0 8px 30px rgba(0,0,0,0.2), 0 2px 8px rgba(0,0,0,0.1);"></div>
-
-                    <!-- Envelope flap (triangle) -->
-                    <div style="position: absolute; top: 0; left: 0; right: 0; height: 55%; overflow: hidden;">
-                        <div style="position: absolute; top: 10%; left: 50%; width: 140%; aspect-ratio: 2/1; transform: translateX(-50%) rotate(0deg); background: linear-gradient(170deg, #c4b17a 0%, #b09e5e 50%, #a69358 100%); clip-path: polygon(50% 0%, 0% 100%, 100% 100%); box-shadow: 0 2px 10px rgba(0,0,0,0.1);"></div>
-                    </div>
-
-                    <!-- Envelope fold lines -->
-                    <svg style="position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1;" viewBox="0 0 340 255" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Diagonal fold lines from center bottom of flap -->
-                        <line x1="0" y1="64" x2="170" y2="180" stroke="rgba(0,0,0,0.08)" stroke-width="1"/>
-                        <line x1="340" y1="64" x2="170" y2="180" stroke="rgba(0,0,0,0.08)" stroke-width="1"/>
-                    </svg>
-
-                    <!-- Wax seal -->
-                    <div style="position: absolute; bottom: 28%; left: 50%; transform: translateX(-50%); z-index: 3; width: 3.8rem; height: 3.8rem; border-radius: 50%; background: radial-gradient(circle at 38% 35%, #d44a3a, #b83227 40%, #922b21 65%, #7b241c 100%); box-shadow: 0 3px 12px rgba(146,43,33,0.5), inset 0 1px 3px rgba(255,200,180,0.3), inset 0 -2px 4px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center;">
-                        <!-- Seal scalloped edge -->
-                        <div style="position: absolute; inset: -4px; border-radius: 50%; background: radial-gradient(circle, transparent 60%, rgba(146,43,33,0.15) 100%); filter: url(#seal-edge);"></div>
-                        <!-- Initials -->
-                        <span style="font-family: 'Sacramento', cursive; font-size: 1.5rem; color: rgba(245,213,200,0.9); text-shadow: 0 1px 2px rgba(0,0,0,0.4); position: relative; z-index: 1;">M &amp; D</span>
-                    </div>
-
-                    <!-- Tulips — bottom left of envelope -->
-                    <div style="position: absolute; bottom: -8%; left: -8%; z-index: 4; transform: rotate(15deg);">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="120" height="140" viewBox="0 0 120 140" fill="none">
-                            <!-- Stems -->
-                            <path d="M55 140 C52 110, 40 80, 35 55" stroke="#3d6b45" stroke-width="2.5" fill="none"/>
-                            <path d="M55 140 C58 105, 55 75, 50 50" stroke="#4a7a52" stroke-width="2.5" fill="none"/>
-                            <path d="M55 140 C60 115, 70 85, 68 55" stroke="#3d6b45" stroke-width="2.5" fill="none"/>
-                            <!-- Leaves -->
-                            <path d="M52 115 C40 108, 28 112, 20 105" stroke="#4a7a52" stroke-width="2" fill="none"/>
-                            <path d="M52 115 C42 110, 32 114, 22 108" fill="#5a8a5e" opacity="0.4"/>
-                            <path d="M58 105 C68 98, 78 102, 85 95" stroke="#4a7a52" stroke-width="2" fill="none"/>
-                            <!-- Tulip 1 (left) -->
-                            <path d="M35 55 C30 42, 22 35, 26 22 C28 30, 32 32, 35 22 C38 32, 42 30, 44 22 C48 35, 40 42, 35 55" fill="#a8254e"/>
-                            <path d="M35 55 C32 45, 28 38, 30 28 C32 35, 35 35, 35 55" fill="#c4305e" opacity="0.6"/>
-                            <!-- Tulip 2 (center) -->
-                            <path d="M50 50 C45 37, 37 30, 41 17 C43 25, 47 27, 50 17 C53 27, 57 25, 59 17 C63 30, 55 37, 50 50" fill="#8e1d42"/>
-                            <path d="M50 50 C47 40, 43 33, 45 23 C47 30, 50 30, 50 50" fill="#b0284f" opacity="0.6"/>
-                            <!-- Tulip 3 (right) -->
-                            <path d="M68 55 C63 42, 58 35, 62 25 C64 31, 66 33, 68 25 C70 33, 72 31, 74 25 C78 35, 73 42, 68 55" fill="#a8254e"/>
-                            <path d="M68 55 C65 45, 62 38, 64 30 C66 37, 68 37, 68 55" fill="#c4305e" opacity="0.6"/>
-                        </svg>
-                    </div>
-                </div>
-
-                <!-- Guest name -->
-                <div id="guest-name" data-message="Dear / 親愛的" style="color: #8b7355; margin-top: 1rem;"></div>
-
-                <!-- Tap to open -->
-                <button type="button" class="btn mt-3 mx-auto px-4 py-2" style="background: none; border: none; color: #9e9484; font-size: 0.8rem; letter-spacing: 0.15rem; text-transform: uppercase;" onclick="undangan.guest.open(this)">
-                    Tap to Open the Seal...
-                </button>
+                <button type="button" class="btn btn-light shadow rounded-4 mt-3 mx-auto" onclick="undangan.guest.open(this)"><i class="fa-solid fa-envelope-open fa-bounce me-2"></i>Open Invitation</button>
             </div>
         </div>
     </div>
