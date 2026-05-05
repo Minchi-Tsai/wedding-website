@@ -11,15 +11,14 @@ export const rsvp = (() => {
     let information = null;
 
     /**
-     * Google Apps Script web app URL.
-     * Replace with your own deployed Apps Script URL.
+     * @type {string}
      */
-    const APPS_SCRIPT_URL = document.body.getAttribute('data-rsvp-url') || '';
+    let APPS_SCRIPT_URL = '';
 
     /**
-     * reCAPTCHA v3 site key.
+     * @type {string}
      */
-    const RECAPTCHA_SITE_KEY = document.body.getAttribute('data-recaptcha-key') || '';
+    let RECAPTCHA_SITE_KEY = '';
 
     /**
      * @param {string} type
@@ -126,6 +125,8 @@ export const rsvp = (() => {
      */
     const init = () => {
         information = storage('information');
+        APPS_SCRIPT_URL = document.body.getAttribute('data-rsvp-url') || '';
+        RECAPTCHA_SITE_KEY = document.body.getAttribute('data-recaptcha-key') || '';
     };
 
     return {
