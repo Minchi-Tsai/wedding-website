@@ -84,13 +84,8 @@ export const guest = (() => {
             form.value = information.get('name') ?? name;
         }
 
-        // Show RSVP section only if guest name is present (URL-gated)
-        const rsvpSection = document.getElementById('rsvp');
-        const rsvpNav = document.querySelector('a.nav-link[href="#rsvp"]')?.closest('li.nav-item');
-        if (!name) {
-            rsvpSection?.remove();
-            rsvpNav?.remove();
-        }
+        // RSVP form is always visible
+        // ?to=Name just adds a personalized greeting and pre-fills the name
     };
 
     /**
