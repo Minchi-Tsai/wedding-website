@@ -7,6 +7,7 @@ export const lang = (() => {
         'de': 'DE',
         'es': 'ES',
         'zh': 'CN',
+        'zh-tw': 'TW',
         'ja': 'JP',
         'ko': 'KR',
         'ar': 'SA',
@@ -97,7 +98,13 @@ export const lang = (() => {
          */
         init() {
             mapping = new Map();
-            this.setDefault(navigator.language.split('-').shift());
+            // Try full locale first (e.g. zh-TW), then base language (e.g. zh)
+            const full = navigator.language.toLowerCase();
+            if (countryMapping[full]) {
+                this.setDefault(full);
+            } else {
+                this.setDefault(full.split('-').shift());
+            }
         },
     };
 })();

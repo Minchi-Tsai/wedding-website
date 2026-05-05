@@ -1,70 +1,50 @@
-# 💌 Template website undangan pernikahan sederhana
+# Wedding Website
 
-![Thumbnail](/assets/images/banner.webp)
+A modern, mobile-first wedding invitation website with RSVP via Google Sheets.
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/cef32dbf-f26f-4865-84a9-b85a439c9994/deploy-status)](https://app.netlify.com/sites/ulems/deploys)
-[![Hits](https://dikit.my.id/0b3y8q)](https://cie.my.id)
-[![GitHub repo size](https://img.shields.io/github/repo-size/dewanakl/undangan?color=brightgreen)](https://shields.io)
-[![GitHub License](https://img.shields.io/github/license/dewanakl/undangan?color=brightgreen)](https://shields.io)
+## Features
 
-## 🚀 Demo
-Untuk kamu yang ingin melihat demo terlebih dahulu:
+- Responsive design (Bootstrap 5) — optimized for mobile
+- RSVP form → Google Sheets (serverless, free)
+- Anti-spam: honeypot field + optional reCAPTCHA v3
+- Guest personalization via URL (`?to=GuestName`)
+- Photo gallery with lazy loading and lightbox
+- Background music with play/pause
+- Countdown timer
+- Add to Calendar (Google, Apple, Outlook, Yahoo)
+- Light/dark/auto theme
+- Offline detection
+- AOS scroll animations + confetti effects
+- i18n support (zh-TW, English, and more)
 
-[https://ulems.my.id/?to=Teman teman semua](https://ulems.my.id/?to=Teman%20teman%20semua)
+## Quick Start
 
-## 📦 Documentation
+```bash
+npm install
+npm run dev        # http://localhost:8080
+npm run build      # Production build → dist/
+```
 
-* Jalankan perintah `npm install`, lalu `npm run dev`, dan buka `http://localhost:8080`.
-* Ubah isi file `index.html` sesuai keinginanmu.
-* Jika tidak ingin menggunakan **fitur komentar**, hapus atribut `data-url` dan `data-key` di elemen `<body>` pada index.html.
-* Sesuaikan `data-url` pada `<body>` di index dan dashboard sesuai dengan URL backend (jika kamu meng-hosting sendiri).
-* Sesuaikan juga `data-key` di index dengan access key yang bisa kamu ambil dari dashboard.
-* Jika ingin menggunakan GIF, dapatkan Tenor API key di [developers.google.com/tenor](https://developers.google.com/tenor/guides/quickstart).
-* Untuk deployment, jalankan `npm run build:public`. Folder `public` adalah yang akan kamu upload.
-* Untuk backend self-hosting, lihat penjelasan di bawah, atau gunakan **trial API** secara gratis.
+## Customization
 
-> Undangan ini hanya menggunakan HTML, CSS, dan JavaScript biasa. NPM digunakan agar file JavaScript bisa langsung dieksekusi (bukan bertipe module lagi).
+1. Edit `index.html` — replace all `TODO` placeholders with your wedding details
+2. Replace images in `assets/images/` with your photos
+3. Replace `assets/music/` with your background music
+4. Set up Google Sheets RSVP (see below)
+5. Push to GitHub → auto-deploys via GitHub Actions
 
-> Jika tetap ingin tanpa NPM, ubah `src="./dist/guest.js"` menjadi `src="./js/guest.js" type="module"` pada tag `<head>` di index dan dashboard.html, dengan risiko glitch tema di awal loading.
+## Google Sheets RSVP Setup
 
-> Jika kamu punya pertanyaan, gunakan fitur `discussions` agar bisa dibaca juga oleh teman-teman lainnya.
+1. Create a new Google Sheet with columns: `Timestamp | Name | Email | Attendance | Guest Count | Message`
+2. Open **Extensions > Apps Script**
+3. Paste the code from `docs/google-apps-script.js`
+4. **Deploy > New deployment > Web app** (Execute as: Me, Access: Anyone)
+5. Copy the web app URL → set as `data-rsvp-url` in `index.html`
 
-> [!WARNING]  
-> Gunakan versi 3.14.0, untuk versi 4 masih tahap pengembangan dan berpotensi teredapat bug 🐛
+## Deployment
 
-## 🔥 Deployment API
+Pushes to `main` auto-deploy to GitHub Pages via `.github/workflows/deploy.yml`.
 
-- Video\
-    otw
+## Based On
 
-- Presentation
-    [https://docs.google.com/presentation](https://docs.google.com/presentation/d/1EY2YmWdZUI7ASoo0f2wvU7ec_Yt0uZanYa8YLbfNysk/edit)
-
-## ⏰ Trial API
-Untuk kamu yang ingin mencoba secara gratis:
-
-[https://trial.ulems.my.id](https://trial.ulems.my.id)
-
-## ⚙️ Tech stack
-
-- Bootstrap 5.3.8
-- AOS 2.3.4
-- Fontawesome 7.1.0
-- Canvas Confetti 1.9.3
-- Google Fonts
-- Vanilla JS
-
-## 🎨 Credit
-All visual assets in this project are sourced from Pixabay.
-
-## 🤝 Contributing
-
-I'm very open to those of you who want to contribute to the undangan!
-
-## 🐞 Security Vulnerabilities
-
-If you find any security vulnerabilities in this undangan, please email DKL via [dewanakretarta29@gmail.com](mailto:dewanakretarta29@gmail.com).
-
-## 📜 License
-
-Undangan is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+[dewanakl/undangan](https://github.com/dewanakl/undangan) — MIT License

@@ -1,6 +1,7 @@
 import { video } from './video.js';
 import { image } from './image.js';
 import { audio } from './audio.js';
+import { rsvp } from './rsvp.js';
 import { progress } from './progress.js';
 import { util } from '../../common/util.js';
 import { bs } from '../../libs/bootstrap.js';
@@ -8,9 +9,7 @@ import { loader } from '../../libs/loader.js';
 import { theme } from '../../common/theme.js';
 import { lang } from '../../common/language.js';
 import { storage } from '../../common/storage.js';
-import { session } from '../../common/session.js';
 import { offline } from '../../common/offline.js';
-import { comment } from '../components/comment.js';
 import * as confetti from '../../libs/confetti.js';
 import { pool } from '../../connection/request.js';
 
@@ -33,7 +32,7 @@ export const guest = (() => {
         const count = (new Date(document.body.getAttribute('data-time').replace(' ', 'T'))).getTime();
 
         /**
-         * @param {number} num 
+         * @param {number} num
          * @returns {string}
          */
         const pad = (num) => num < 10 ? `0${num}` : `${num}`;
@@ -61,10 +60,6 @@ export const guest = (() => {
      * @returns {void}
      */
     const showGuestName = () => {
-        /**
-         * Make sure "to=" is the last query string.
-         * Ex. ulems.my.id/?id=some-uuid-here&to=name
-         */
         const raw = window.location.search.split('to=');
         let name = null;
 
@@ -83,9 +78,18 @@ export const guest = (() => {
             guestName?.appendChild(div);
         }
 
+        // Pre-fill the RSVP form name
         const form = document.getElementById('form-name');
         if (form) {
             form.value = information.get('name') ?? name;
+        }
+
+        // Show RSVP section only if guest name is present (URL-gated)
+        const rsvpSection = document.getElementById('rsvp');
+        const rsvpNav = document.querySelector('a.nav-link[href="#rsvp"]')?.closest('li.nav-item');
+        if (!name) {
+            rsvpSection?.remove();
+            rsvpNav?.remove();
         }
     };
 
@@ -205,7 +209,7 @@ export const guest = (() => {
     };
 
     /**
-     * @param {HTMLDivElement} div 
+     * @param {HTMLDivElement} div
      * @returns {void}
      */
     const showStory = (div) => {
@@ -225,15 +229,6 @@ export const guest = (() => {
     /**
      * @returns {void}
      */
-    const normalizeArabicFont = () => {
-        document.querySelectorAll('.font-arabic').forEach((el) => {
-            el.innerHTML = String(el.innerHTML).normalize('NFC');
-        });
-    };
-
-    /**
-     * @returns {void}
-     */
     const animateSvg = () => {
         document.querySelectorAll('svg').forEach((el) => {
             if (el.hasAttribute('data-class')) {
@@ -245,25 +240,86 @@ export const guest = (() => {
     /**
      * @returns {void}
      */
-    const buildGoogleCalendar = () => {
-        /**
-         * @param {string} d 
-         * @returns {string}
-         */
+    const buildCalendarLinks = () => {
+        const calBtn = document.querySelector('#home button[data-calendar]');
+        if (!calBtn) {
+            return;
+        }
+
+        const title = calBtn.getAttribute('data-cal-title') || 'Wedding';
+        const start = calBtn.getAttribute('data-cal-start') || document.body.getAttribute('data-time');
+        const end = calBtn.getAttribute('data-cal-end') || '';
+        const location = calBtn.getAttribute('data-cal-location') || '';
+        const details = calBtn.getAttribute('data-cal-details') || '';
+        const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+        // Google Calendar link
         const formatDate = (d) => (new Date(d.replace(' ', 'T') + ':00Z')).toISOString().replace(/[-:]/g, '').split('.').shift();
-
-        const url = new URL('https://calendar.google.com/calendar/render');
-        const data = new URLSearchParams({
+        const googleUrl = new URL('https://calendar.google.com/calendar/render');
+        googleUrl.search = new URLSearchParams({
             action: 'TEMPLATE',
-            text: 'The Wedding of Wahyu and Riski',
-            dates: `${formatDate('2023-03-15 10:00')}/${formatDate('2023-03-15 11:00')}`,
-            details: 'Tanpa mengurangi rasa hormat, kami mengundang Anda untuk berkenan menghadiri acara pernikahan kami. Terima kasih atas perhatian dan doa restu Anda, yang menjadi kebahagiaan serta kehormatan besar bagi kami.',
-            location: 'RT 10 RW 02, Desa Pajerukan, Kec. Kalibagor, Kab. Banyumas, Jawa Tengah 53191.',
-            ctz: config.get('tz'),
-        });
+            text: title,
+            dates: `${formatDate(start)}/${end ? formatDate(end) : formatDate(start)}`,
+            details: details,
+            location: location,
+            ctz: tz,
+        }).toString();
 
-        url.search = data.toString();
-        document.querySelector('#home button')?.addEventListener('click', () => window.open(url, '_blank'));
+        calBtn.addEventListener('click', () => window.open(googleUrl, '_blank'));
+
+        // Build calendar links for the RSVP success modal
+        const calContainer = document.getElementById('add-to-cal');
+        if (calContainer) {
+            const startDate = new Date(start.replace(' ', 'T'));
+            const endDate = end ? new Date(end.replace(' ', 'T')) : new Date(startDate.getTime() + 2 * 60 * 60 * 1000);
+
+            const icsContent = [
+                'BEGIN:VCALENDAR',
+                'VERSION:2.0',
+                'BEGIN:VEVENT',
+                'URL:' + document.URL,
+                'DTSTART:' + formatDate(start),
+                'DTEND:' + (end ? formatDate(end) : formatDate(start)),
+                'SUMMARY:' + title,
+                'DESCRIPTION:' + details,
+                'LOCATION:' + location,
+                'END:VEVENT',
+                'END:VCALENDAR'
+            ].join('\n');
+
+            const icsHref = encodeURI('data:text/calendar;charset=utf8,' + icsContent);
+
+            // Yahoo Calendar
+            const duration = Math.round((endDate - startDate) / 60000);
+            const yahooHours = String(Math.floor(duration / 60)).padStart(2, '0');
+            const yahooMins = String(duration % 60).padStart(2, '0');
+            const yahooUrl = encodeURI([
+                'https://calendar.yahoo.com/?v=60&view=d&type=20',
+                '&title=' + title,
+                '&st=' + formatDate(start),
+                '&dur=' + yahooHours + yahooMins,
+                '&desc=' + details,
+                '&in_loc=' + location
+            ].join(''));
+
+            const calHtml = `
+                <div class="d-flex flex-column gap-2 mt-3">
+                    <a href="${googleUrl.toString()}" target="_blank" class="btn btn-outline-auto btn-sm rounded-4 shadow-sm">
+                        <i class="fa-brands fa-google me-2"></i>Google Calendar
+                    </a>
+                    <a href="${icsHref}" target="_blank" class="btn btn-outline-auto btn-sm rounded-4 shadow-sm">
+                        <i class="fa-brands fa-apple me-2"></i>Apple / iCal
+                    </a>
+                    <a href="${icsHref}" target="_blank" class="btn btn-outline-auto btn-sm rounded-4 shadow-sm">
+                        <i class="fa-brands fa-microsoft me-2"></i>Outlook
+                    </a>
+                    <a href="${yahooUrl}" target="_blank" class="btn btn-outline-auto btn-sm rounded-4 shadow-sm">
+                        <i class="fa-brands fa-yahoo me-2"></i>Yahoo Calendar
+                    </a>
+                </div>
+            `;
+            util.safeInnerHTML(calContainer, calHtml);
+        }
     };
 
     /**
@@ -295,11 +351,13 @@ export const guest = (() => {
         countDownDate();
         showGuestName();
         modalImageClick();
-        normalizeArabicFont();
-        buildGoogleCalendar();
+        buildCalendarLinks();
 
         if (information.has('presence')) {
-            document.getElementById('form-presence').value = information.get('presence') ? '1' : '2';
+            const presenceEl = document.getElementById('form-presence');
+            if (presenceEl) {
+                presenceEl.value = information.get('presence') ? '1' : '2';
+            }
         }
 
         if (information.get('info')) {
@@ -319,7 +377,7 @@ export const guest = (() => {
     const pageLoaded = () => {
         lang.init();
         offline.init();
-        comment.init();
+        rsvp.init();
         progress.init();
 
         config = storage('config');
@@ -329,8 +387,6 @@ export const guest = (() => {
         const img = image.init();
         const aud = audio.init();
         const lib = loaderLibs();
-        const token = document.body.getAttribute('data-key');
-        const params = new URLSearchParams(window.location.search);
 
         window.addEventListener('resize', util.debounce(slide));
         document.addEventListener('undangan.progress.done', () => booting());
@@ -339,45 +395,11 @@ export const guest = (() => {
             img.download(e.currentTarget.getAttribute('data-src'));
         });
 
-        if (!token || token.length <= 0) {
-            document.getElementById('comment')?.remove();
-            document.querySelector('a.nav-link[href="#comment"]')?.closest('li.nav-item')?.remove();
-
-            vid.load();
-            img.load();
-            aud.load();
-            lib.load({ confetti: document.body.getAttribute('data-confetti') === 'true' });
-        }
-
-        if (token && token.length > 0) {
-            // add 2 progress for config and comment.
-            // before img.load();
-            progress.add();
-            progress.add();
-
-            // if don't have data-src.
-            if (!img.hasDataSrc()) {
-                img.load();
-            }
-
-            session.guest(params.get('k') ?? token).then(({ data }) => {
-                document.dispatchEvent(new Event('undangan.session'));
-                progress.complete('config');
-
-                if (img.hasDataSrc()) {
-                    img.load();
-                }
-
-                vid.load();
-                aud.load();
-                lib.load({ confetti: data.is_confetti_animation });
-
-                comment.show()
-                    .then(() => progress.complete('comment'))
-                    .catch(() => progress.invalid('comment'));
-
-            }).catch(() => progress.invalid('config'));
-        }
+        // No backend token needed — load everything directly
+        vid.load();
+        img.load();
+        aud.load();
+        lib.load({ confetti: document.body.getAttribute('data-confetti') === 'true' });
     };
 
     /**
@@ -385,15 +407,6 @@ export const guest = (() => {
      */
     const init = () => {
         theme.init();
-        session.init();
-
-        if (session.isAdmin()) {
-            storage('user').clear();
-            storage('owns').clear();
-            storage('likes').clear();
-            storage('session').clear();
-            storage('comment').clear();
-        }
 
         window.addEventListener('load', () => {
             pool.init(pageLoaded, [
@@ -401,14 +414,13 @@ export const guest = (() => {
                 'video',
                 'audio',
                 'libs',
-                'gif',
             ]);
         });
 
         return {
             util,
             theme,
-            comment,
+            rsvp,
             guest: {
                 open,
                 modal,
