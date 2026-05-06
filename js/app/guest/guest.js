@@ -78,10 +78,10 @@ export const guest = (() => {
             guestName?.appendChild(div);
         }
 
-        // Pre-fill the RSVP form name
+        // Pre-fill the RSVP form name only if ?to= is provided
         const form = document.getElementById('form-name');
-        if (form) {
-            form.value = information.get('name') ?? name;
+        if (form && name) {
+            form.value = name;
         }
 
         // RSVP form is always visible
