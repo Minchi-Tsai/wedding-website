@@ -229,22 +229,24 @@ function doGet() {
  * @param {string} name
  */
 function sendConfirmationEmail(email, name) {
-  var subject = 'RSVP Confirmed — Minchi & David\'s Wedding';
-  var htmlBody = '<!DOCTYPE html><html><body style="font-family: Georgia, serif; max-width: 500px; margin: 0 auto; padding: 20px; color: #333;">'
+  var subject = 'RSVP Confirmed 已確認出席 — Minchi & David\'s Wedding';
+  var htmlBody = '<!DOCTYPE html><html><head><meta name="format-detection" content="address=no"></head>'
+    + '<body style="font-family: Georgia, serif; max-width: 500px; margin: 0 auto; padding: 20px; color: #333;">'
     + '<div style="text-align: center; padding: 30px 20px;">'
     + '<h1 style="font-size: 24px; font-weight: normal; color: #333; margin-bottom: 5px;">Your RSVP is confirmed</h1>'
     + '<p style="font-size: 14px; color: #555; letter-spacing: 1px; margin-top: 5px;">您的出席回覆已確認</p>'
     + '<hr style="border: none; border-top: 1px solid #ddd; max-width: 100px; margin: 25px auto;">'
-    + '<p style="font-size: 18px; font-weight: bold; margin-bottom: 5px;">November 29, 2026 · Sunday <span style="font-size: 14px; letter-spacing: 1px;">週日</span></p>'
-    + '<p style="font-size: 16px; font-weight: bold; margin-bottom: 2px;">11:30 AM</p>'
+    + '<p style="font-size: 18px; font-weight: bold; margin-bottom: 5px;">November 29, 2026 · Sunday</p>'
+    + '<p style="font-size: 14px; letter-spacing: 1px; color: #555; margin-top: 0;">2026.11.29 週日</p>'
+    + '<p style="font-size: 16px; font-weight: bold; margin-top: 10px; margin-bottom: 2px;">11:30 AM</p>'
     + '<hr style="border: none; border-top: 1px solid #ddd; max-width: 100px; margin: 25px auto;">'
-    + '<p style="font-size: 16px; font-weight: bold; margin-bottom: 2px;">Taipei Marriott Hotel</p>'
+    + '<p style="font-size: 16px; font-weight: bold; margin-bottom: 2px;"><a href="https://maps.google.com/?q=Taipei+Marriott+Hotel" target="_blank" style="color: #b8976a; text-decoration: none;">Taipei Marriott Hotel</a></p>'
     + '<p style="font-size: 14px; letter-spacing: 1px; color: #555; margin-top: 0;">台北萬豪酒店</p>'
-    + '<p style="font-size: 13px; color: #777;">No.199 Lequn 2nd Road, ZhongShan District, Taipei</p>'
-    + '<p style="font-size: 13px; color: #777; letter-spacing: 1px;">台北市中山區樂群二路199號</p>'
-    + '<a href="https://maps.google.com/?q=Taipei+Marriott+Hotel" target="_blank" style="display: inline-block; margin-top: 10px; color: #b8976a; text-decoration: none; font-size: 13px;">View on Google Maps</a>'
+    + '<span style="font-size: 13px; color: #777;">No.199 Lequn 2nd Road, ZhongShan District, Taipei</span><br>'
+    + '<span style="font-size: 13px; color: #777; letter-spacing: 1px;">台北市中山區樂群二路199號</span>'
     + '<hr style="border: none; border-top: 1px solid #ddd; max-width: 100px; margin: 25px auto;">'
-    + '<p style="font-family: Georgia, serif; font-size: 22px; color: #333; margin-top: 20px;"><em>Minchi &amp; David</em></p>'
+    + '<p style="font-family: Georgia, serif; font-size: 24px; font-style: italic; color: #333; margin-top: 20px; margin-bottom: 0;">Minchi &amp; David</p>'
+    + '<p style="font-size: 12px; letter-spacing: 1px; color: #555; margin-top: 5px;">旻淇 &amp; 大為</p>'
     + '</div>'
     + '</body></html>';
 
