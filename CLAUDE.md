@@ -11,3 +11,12 @@ The Apps Script (`docs/google-apps-script.js`) MUST only interact with the RSVP 
 5. **No external HTTP calls** except to Google's own reCAPTCHA verification endpoint
 
 If broader spreadsheet functionality is ever needed, create a dedicated Google account for the wedding so the script has zero access to personal/work data.
+
+## Typography — Chinese & English Sizing
+
+Chinese characters render larger than English when using the Sacramento cursive font (which only covers Latin). When mixing Chinese and English in the same heading or line:
+
+- Wrap Chinese text in a `<span>` with a smaller `font-size` (~60% of the English size)
+- Example: English at `2rem` → Chinese at `1.2rem`
+- This applies everywhere Chinese appears alongside `font-esthetic` (Sacramento) headings
+- Standalone Chinese text (addresses, subtitles) at their own size is fine
