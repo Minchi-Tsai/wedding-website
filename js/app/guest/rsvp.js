@@ -47,10 +47,7 @@ export const rsvp = (() => {
 
         // Check if already submitted on this device
         if (information.get('submitted')) {
-            const updateMsg = lang
-                .on('zh-tw', '您已經回覆過了，確定要更新您的回覆嗎？')
-                .on('en', 'You have already submitted your RSVP. Would you like to update your response?')
-                .get();
+            const updateMsg = 'You have already submitted your RSVP. Would you like to update your response?\n\n您已經回覆過了，確定要更新您的回覆嗎？';
             if (!window.confirm(updateMsg)) {
                 return;
             }
