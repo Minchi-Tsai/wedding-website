@@ -247,7 +247,7 @@ function sendConfirmationEmail(email, name) {
     + '<p style="font-size: 15px; font-weight: bold; margin-top: 15px; margin-bottom: 2px;"><a href="https://maps.google.com/?q=Taipei+Marriott+Hotel" target="_blank" style="color: #b8976a; text-decoration: none;">Taipei Marriott Hotel</a></p>'
     + '<p style="font-size: 13px; letter-spacing: 1px; color: #555; margin-top: 0;">台北萬豪酒店</p>'
     // Website link
-    + '<p style="margin-top: 15px;"><a href="https://minchi-tsai.github.io/wedding-website/" target="_blank" style="color: #b8976a; text-decoration: none; font-size: 13px;">View Details  查看婚禮資訊</a></p>'
+    + '<p style="margin-top: 15px;"><a href="https://minchi-tsai.github.io/wedding-website/" target="_blank" style="color: #b8976a; text-decoration: none; font-size: 12px; opacity: 0.7;">View Details  查看婚禮資訊</a></p>'
     + hr
     // Signature
     + '<p style="font-family: Georgia, serif; font-size: 22px; font-style: italic; color: #333; margin-top: 20px; margin-bottom: 0;">Minchi &amp; David</p>'
