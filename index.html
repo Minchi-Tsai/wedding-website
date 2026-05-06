@@ -418,7 +418,7 @@
 
                         <div class="mb-3">
                             <label for="form-name" class="form-label my-1"><i class="fa-solid fa-person me-2"></i>Your name <span style="font-size: 0.85rem;">您的姓名</span></label>
-                            <input dir="auto" type="text" class="form-control rounded-4 rsvp-input" id="form-name" minlength="2" maxlength="50" placeholder="Your name / 您的姓名" autocomplete="name" data-offline-disabled="false">
+                            <input dir="auto" type="text" class="form-control rounded-4 rsvp-input" id="form-name" minlength="2" maxlength="50" placeholder="Your name / 您的姓名" autocomplete="off" data-offline-disabled="false">
                         </div>
 
                         <div class="mb-3">
@@ -429,7 +429,10 @@
                                 <option value="2">Sorry, I'm unable to attend 很遺憾無法出席</option>
                             </select>
                             <script>
-                                document.getElementById('form-presence').addEventListener('change', function() {
+                                var presenceEl = document.getElementById('form-presence');
+                                // Force reset to default on page load (prevent browser auto-fill)
+                                presenceEl.value = '0';
+                                presenceEl.addEventListener('change', function() {
                                     var v = this.value;
                                     document.getElementById('attending-fields').classList.toggle('show', v === '1');
                                     document.getElementById('attending-message').classList.toggle('show', v === '1');
