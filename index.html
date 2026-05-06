@@ -415,8 +415,8 @@
                         <div class="mb-3">
                             <label for="form-presence" class="form-label my-1"><i class="fa-solid fa-person-circle-question me-2"></i>Attendance <span style="font-size: 0.85rem;">是否出席</span></label>
                             <select class="form-select rounded-4 rsvp-input" id="form-presence" autocomplete="off" data-offline-disabled="false">
-                                <option value="1" selected>Yes, I'd love to be there! / 我很期待參加！</option>
-                                <option value="2">Sorry, I'm unable to attend / 很遺憾無法出席</option>
+                                <option value="1" selected>Yes, I'd love to be there! 我很期待參加！</option>
+                                <option value="2">Sorry, I'm unable to attend 很遺憾無法出席</option>
                             </select>
                             <script>
                                 document.getElementById('form-presence').addEventListener('change', function() {
@@ -429,22 +429,22 @@
                         <!-- Fields only shown when attending -->
                         <div id="attending-fields">
                             <div class="mb-3">
-                                <label for="form-guest-count" class="form-label my-1"><i class="fa-solid fa-users me-2"></i>Number of guests attending <span style="font-size: 0.85rem;">出席人數</span></label>
+                                <label for="form-guest-count" class="form-label my-1"><i class="fa-solid fa-users me-2"></i>Guests attending <span style="font-size: 0.85rem;">出席人數</span></label>
                                 <select class="form-select rounded-4 rsvp-input" id="form-guest-count" autocomplete="off" data-offline-disabled="false">
-                                    <option value="1" selected>1 guest / 1 位</option>
-                                    <option value="2">2 guests / 2 位</option>
-                                    <option value="other">Other, please let us know in the message / 其他，請於留言中告訴我們</option>
+                                    <option value="1" selected>1 guest 1 位</option>
+                                    <option value="2">2 guests 2 位</option>
+                                    <option value="other">Other, please let us know in the message 其他，請於留言中告訴我們</option>
                                 </select>
                             </div>
 
                             <div class="mb-3">
                                 <label for="form-invitation-type" class="form-label my-1"><i class="fa-solid fa-envelope-circle-check me-2"></i>Where should we send your invitation? <span style="font-size: 0.85rem;">喜帖要寄送到哪裡呢？</span></label>
                                 <select class="form-select rounded-4 rsvp-input" id="form-invitation-type" autocomplete="off" data-offline-disabled="false">
-                                    <option value="" selected>Select / 請選擇</option>
-                                    <option value="email">Email address / 電子信箱</option>
-                                    <option value="mail">Mailing address / 收件地址</option>
-                                    <option value="both">Email address and mailing address / 電子信箱與收件地址</option>
-                                    <option value="none">No need to send an invitation / 不需寄送喜帖</option>
+                                    <option value="" selected>Select 請選擇</option>
+                                    <option value="email">Email address 電子信箱</option>
+                                    <option value="mail">Mailing address 收件地址</option>
+                                    <option value="both">Email address and mailing address 電子信箱與收件地址</option>
+                                    <option value="none">No need to send an invitation 不需寄送喜帖</option>
                                 </select>
                                 <script>
                                     document.getElementById('form-invitation-type').addEventListener('change', function() {
