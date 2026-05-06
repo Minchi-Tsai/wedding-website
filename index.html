@@ -51,7 +51,11 @@
 
     <!-- Dependencies JS -->
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha256-5P1JGBOIxI7FBAvT/mb1fCnI5n/NhQKzNUuW7Hq0fMc=" crossorigin="anonymous"></script>
-    <script src="./dist/guest.js?v=3"></script>
+    <script>
+        // Clear all browser caches to force fresh content
+        if (window.caches) { caches.keys().then(function(names) { names.forEach(function(name) { caches.delete(name); }); }); }
+    </script>
+    <script src="./dist/guest.js?v=4"></script>
 
     <!-- reCAPTCHA v3 — replace YOUR_SITE_KEY with your actual key -->
     <!-- <script src="https://www.google.com/recaptcha/api.js?render=YOUR_SITE_KEY"></script> -->
