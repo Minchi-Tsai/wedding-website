@@ -434,11 +434,32 @@
                                 <option value="both">Email address and mailing address / 電子信箱與收件地址</option>
                                 <option value="none">No need to send an invitation / 不需寄送喜帖</option>
                             </select>
+                            <script>
+                                document.getElementById('form-invitation-type').addEventListener('change', function() {
+                                    var v = this.value;
+                                    var details = document.getElementById('invitation-details');
+                                    var email = document.getElementById('field-email');
+                                    var addr = document.getElementById('field-address');
+                                    details.classList.toggle('d-none', !v || v === 'none');
+                                    email.classList.toggle('d-none', v !== 'email' && v !== 'both');
+                                    addr.classList.toggle('d-none', v !== 'mail' && v !== 'both');
+                                });
+                            </script>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="form-email" class="form-label my-1"><i class="fa-solid fa-envelope me-2"></i>Address / Email <span style="font-size: 0.85rem;">收件地址 / 電子信箱</span></label>
-                            <input type="text" class="form-control rounded-4 rsvp-input" id="form-email" placeholder="Mailing address or email / 郵寄地址或電子信箱" autocomplete="off" data-offline-disabled="false">
+                        <div id="invitation-details" class="mb-3 d-none">
+                            <label class="form-label my-1"><i class="fa-solid fa-circle-info me-2"></i>Invitation delivery details <span style="font-size: 0.85rem;">喜帖寄送資訊</span></label>
+                            <p class="mb-2" style="font-size: 0.8rem; opacity: 0.7;">Please fill in the information needed for your invitation preference. <span style="font-size: 0.75rem;">請依照您選擇的喜帖寄送方式填寫所需資訊。</span></p>
+
+                            <div id="field-email" class="mb-2 d-none">
+                                <label for="form-email" class="form-label my-1" style="font-size: 0.9rem;">Email address <span style="font-size: 0.8rem;">電子信箱</span></label>
+                                <input type="email" class="form-control rounded-4 rsvp-input" id="form-email" placeholder="your@email.com" autocomplete="email" data-offline-disabled="false">
+                            </div>
+
+                            <div id="field-address" class="mb-2 d-none">
+                                <label for="form-address" class="form-label my-1" style="font-size: 0.9rem;">Mailing address <span style="font-size: 0.8rem;">收件地址</span></label>
+                                <input type="text" class="form-control rounded-4 rsvp-input" id="form-address" placeholder="Mailing address / 郵寄地址" autocomplete="off" data-offline-disabled="false">
+                            </div>
                         </div>
 
                         <div class="mb-3">
