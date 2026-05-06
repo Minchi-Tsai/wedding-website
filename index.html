@@ -412,11 +412,6 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="form-email" class="form-label my-1"><i class="fa-solid fa-envelope me-2"></i>Email</label>
-                            <input type="email" class="form-control rounded-4 rsvp-input" id="form-email" placeholder="your@email.com (optional)" autocomplete="email" data-offline-disabled="false">
-                        </div>
-
-                        <div class="mb-3">
                             <label for="form-presence" class="form-label my-1"><i class="fa-solid fa-person-circle-question me-2"></i>Attendance</label>
                             <select class="form-select rounded-4 rsvp-input" id="form-presence" autocomplete="off" data-offline-disabled="false">
                                 <option value="0" selected>Select attendance</option>
@@ -428,6 +423,20 @@
                         <div class="mb-3">
                             <label for="form-guest-count" class="form-label my-1"><i class="fa-solid fa-users me-2"></i>Number of guests</label>
                             <input type="number" class="form-control rounded-4 rsvp-input" id="form-guest-count" min="1" max="10" value="1" autocomplete="off" data-offline-disabled="false">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="form-invitation-type" class="form-label my-1"><i class="fa-solid fa-envelope-circle-check me-2"></i>Invitation preference</label>
+                            <select class="form-select rounded-4 rsvp-input" id="form-invitation-type" autocomplete="off" data-offline-disabled="false">
+                                <option value="" selected>Physical or e-invitation?</option>
+                                <option value="physical">Physical invitation letter</option>
+                                <option value="e-invitation">E-invitation</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="form-email" class="form-label my-1"><i class="fa-solid fa-envelope me-2"></i>Address / Email</label>
+                            <input type="text" class="form-control rounded-4 rsvp-input" id="form-email" placeholder="Mailing address or email" autocomplete="off" data-offline-disabled="false">
                         </div>
 
                         <div class="mb-3">

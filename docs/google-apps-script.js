@@ -183,9 +183,10 @@ function doPost(e) {
     rsvpSheet.appendRow([
       new Date(),
       params.name.trim(),
-      (params.email || '').trim(),
       attendance,
       parseInt(params.guest_count) || 1,
+      (params.invitation_type || '').trim(),
+      (params.address_email || '').trim(),
       (params.message || '').trim(),
       verified,
       matchedName,

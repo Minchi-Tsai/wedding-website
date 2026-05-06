@@ -35,9 +35,10 @@ export const rsvp = (() => {
      */
     const send = async (button) => {
         const name = document.getElementById('form-name');
-        const email = document.getElementById('form-email');
         const presence = document.getElementById('form-presence');
         const guestCount = document.getElementById('form-guest-count');
+        const invitationType = document.getElementById('form-invitation-type');
+        const email = document.getElementById('form-email');
         const message = document.getElementById('form-message');
         const honeypot = document.getElementById('form-website');
         const alertWrapper = document.getElementById('rsvp-alert');
@@ -63,7 +64,7 @@ export const rsvp = (() => {
 
         // Disable form
         const btn = util.disableButton(button);
-        [name, email, presence, guestCount, message].forEach((el) => {
+        [name, presence, guestCount, invitationType, email, message].forEach((el) => {
             if (el) el.disabled = true;
         });
 
@@ -81,9 +82,10 @@ export const rsvp = (() => {
 
             const body = new URLSearchParams({
                 name: name.value.trim(),
-                email: email ? email.value.trim() : '',
                 attendance: presence ? (presence.value === '1' ? 'yes' : 'no') : 'yes',
                 guest_count: guestCount ? guestCount.value : '1',
+                invitation_type: invitationType ? invitationType.value : '',
+                address_email: email ? email.value.trim() : '',
                 message: message ? message.value.trim() : '',
                 recaptcha_token: recaptchaToken,
             });
@@ -115,7 +117,7 @@ export const rsvp = (() => {
 
         // Re-enable form
         btn.restore();
-        [name, email, presence, guestCount, message].forEach((el) => {
+        [name, presence, guestCount, invitationType, email, message].forEach((el) => {
             if (el) el.disabled = false;
         });
     };
