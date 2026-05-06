@@ -388,9 +388,10 @@
                 </section>
 
                 <!-- RSVP Section -->
-                <section class="bg-light-dark my-0 pb-0 pt-3" id="rsvp">
-                    <div class="container">
-                        <div class="border rounded-5 shadow p-3 mb-2">
+                <section class="my-0 pb-0 pt-3 position-relative overflow-hidden" id="rsvp">
+                    <img src="./assets/images/placeholder.webp" data-src="./assets/images/rsvp-bg.jpeg" alt="bg" class="position-absolute top-0 start-0" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.2; z-index: 0;">
+                    <div class="container position-relative" style="z-index: 1;">
+                        <div class="rounded-5 shadow p-3 mb-2" style="backdrop-filter: blur(12px); background: rgba(var(--bs-body-bg-rgb, 255,255,255), 0.7);">
                             <h2 class="font-esthetic text-center mt-2 mb-4" style="font-size: 2.25rem;">RSVP</h2>
 
                             <div class="mb-3">
@@ -431,7 +432,7 @@
                             <div id="rsvp-alert"></div>
 
                             <div class="d-grid mt-3">
-                                <button class="btn btn-primary btn-sm rounded-4 shadow m-1" onclick="undangan.rsvp.send(this)" data-offline-disabled="false">
+                                <button class="btn btn-sm rounded-4 shadow m-1" style="background-color: #b8976a; border-color: #b8976a; color: #fff;" onclick="undangan.rsvp.send(this)" data-offline-disabled="false">
                                     <i class="fa-solid fa-paper-plane me-2"></i>Send RSVP
                                 </button>
                             </div>
