@@ -72,6 +72,12 @@ export const rsvp = (() => {
             return;
         }
 
+        // Check invitation preference if attending
+        if (isAttending && invitationType && (!invitationType.value || invitationType.value === '')) {
+            util.notify(lang.on('zh-tw', '請選擇喜帖寄送方式。').on('en', 'Please select your invitation preference.').get()).warning();
+            return;
+        }
+
         // Disable form
         const btn = util.disableButton(button);
         [name, presence, guestCount, invitationType, email, address, message].forEach((el) => {
