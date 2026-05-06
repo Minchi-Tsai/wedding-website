@@ -244,9 +244,6 @@ function sendConfirmationEmail(email, name) {
     + '<p style="font-size: 13px; color: #777; letter-spacing: 1px;">台北市中山區樂群二路199號</p>'
     + '<a href="https://maps.google.com/?q=Taipei+Marriott+Hotel" target="_blank" style="display: inline-block; margin-top: 10px; color: #b8976a; text-decoration: none; font-size: 13px;">View on Google Maps</a>'
     + '<hr style="border: none; border-top: 1px solid #ddd; max-width: 100px; margin: 25px auto;">'
-    + '<p style="font-size: 14px; color: #555;">Semi-formal attire preferred.</p>'
-    + '<p style="font-size: 13px; color: #555; letter-spacing: 1px;">歡迎以半正式風格出席</p>'
-    + '<hr style="border: none; border-top: 1px solid #ddd; max-width: 100px; margin: 25px auto;">'
     + '<p style="font-family: Georgia, serif; font-size: 22px; color: #333; margin-top: 20px;"><em>Minchi &amp; David</em></p>'
     + '</div>'
     + '</body></html>';
