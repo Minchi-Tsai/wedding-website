@@ -259,6 +259,11 @@ function sendConfirmationEmail(email, name) {
     + '<p style="font-family: Georgia, serif; font-size: 24px; font-style: italic; color: #333; margin-top: 20px; margin-bottom: 0;">Minchi &amp; David</p>'
     + '<p style="font-size: 12px; letter-spacing: 1px; color: #555; margin-top: 5px;">旻淇 &amp; 大為</p>'
     + '</div>'
+    // Footer blessing
+    + '<div style="text-align: center; padding: 25px 20px; margin-top: 10px; background-color: #f5f0eb;">'
+    + '<p style="font-size: 14px; color: #555; letter-spacing: 1px; margin-bottom: 5px;">誠摯期待您的到來，陪伴我們一同見證愛與幸福的美好時刻</p>'
+    + '<p style="font-size: 13px; color: #777; margin-top: 0;">We sincerely look forward to having you with us as we celebrate this beautiful moment of love and happiness.</p>'
+    + '</div>'
     + '</body></html>';
 
   try {
