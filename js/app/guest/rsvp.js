@@ -63,19 +63,32 @@ export const rsvp = (() => {
         }
 
         if (!name.value || name.value.trim().length === 0) {
-            util.notify(lang.on('zh-tw', '請填寫姓名。').on('en', 'Please enter your name.').get()).warning();
+            alertWrapper.innerHTML = alertMarkup('warning', 'Please enter your name.<br><span style="font-size: 0.85rem; letter-spacing: 0.1rem;">請填寫姓名</span>');
             return;
         }
 
         if (presence && presence.value === '0') {
-            util.notify(lang.on('zh-tw', '請選擇出席狀態。').on('en', 'Please select your attendance status.').get()).warning();
+            alertWrapper.innerHTML = alertMarkup('warning', 'Please select your attendance status.<br><span style="font-size: 0.85rem; letter-spacing: 0.1rem;">請選擇是否出席</span>');
             return;
         }
 
         // Check invitation preference if attending
         if (isAttending && invitationType && (!invitationType.value || invitationType.value === '')) {
-            util.notify(lang.on('zh-tw', '請選擇喜帖寄送方式。').on('en', 'Please select your invitation preference.').get()).warning();
+            alertWrapper.innerHTML = alertMarkup('warning', 'Please select your invitation preference.<br><span style="font-size: 0.85rem; letter-spacing: 0.1rem;">請選擇喜帖寄送方式</span>');
             return;
+        }
+
+        // Check email/address if invitation type requires it
+        if (isAttending && invitationType) {
+            const v = invitationType.value;
+            if ((v === 'email' || v === 'both') && email && !email.value.trim()) {
+                alertWrapper.innerHTML = alertMarkup('warning', 'Please enter your email address.<br><span style="font-size: 0.85rem; letter-spacing: 0.1rem;">請填寫電子信箱</span>');
+                return;
+            }
+            if ((v === 'mail' || v === 'both') && address && !address.value.trim()) {
+                alertWrapper.innerHTML = alertMarkup('warning', 'Please enter your mailing address.<br><span style="font-size: 0.85rem; letter-spacing: 0.1rem;">請填寫收件地址</span>');
+                return;
+            }
         }
 
         // Disable form
