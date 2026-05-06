@@ -429,8 +429,12 @@
                         <!-- Fields only shown when attending -->
                         <div id="attending-fields">
                             <div class="mb-3">
-                                <label for="form-guest-count" class="form-label my-1"><i class="fa-solid fa-users me-2"></i>Number of guests <span style="font-size: 0.85rem;">出席人數</span></label>
-                                <input type="number" class="form-control rounded-4 rsvp-input" id="form-guest-count" min="1" max="10" value="1" autocomplete="off" data-offline-disabled="false">
+                                <label for="form-guest-count" class="form-label my-1"><i class="fa-solid fa-users me-2"></i>Number of guests attending <span style="font-size: 0.85rem;">出席人數</span></label>
+                                <select class="form-select rounded-4 rsvp-input" id="form-guest-count" autocomplete="off" data-offline-disabled="false">
+                                    <option value="1" selected>1 guest / 1 位</option>
+                                    <option value="2">2 guests / 2 位</option>
+                                    <option value="other">Other, please let us know in the message / 其他，請於留言中告訴我們</option>
+                                </select>
                             </div>
 
                             <div class="mb-3">
