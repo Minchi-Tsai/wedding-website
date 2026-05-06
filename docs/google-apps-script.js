@@ -257,7 +257,7 @@ function sendConfirmationEmail(email, name) {
     + hr
     // Signature
     + '<p style="font-family: Georgia, serif; font-size: 24px; font-style: italic; color: #333; margin-top: 20px; margin-bottom: 0;">Minchi &amp; David</p>'
-    + '<p style="font-size: 12px; letter-spacing: 1px; color: #555; margin-top: 5px;">旻淇 &amp; 大為</p>'
+    + '<p style="font-size: 16px; letter-spacing: 1px; color: #555; margin-top: 5px;">旻淇 &amp; 大為</p>'
     + '</div>'
     // Footer blessing
     + '<div style="text-align: center; padding: 25px 20px; margin-top: 10px; background-color: #f5f0eb;">'
