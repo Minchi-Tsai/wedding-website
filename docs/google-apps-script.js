@@ -200,6 +200,12 @@ function doPost(e) {
       guestSheet.getRange(match.row, RESPONSE_COL).setValue(responseValue);
     }
 
+    // Send confirmation email to attending guests with email
+    var guestEmail = (params.email || '').trim();
+    if (attendance === 'yes' && guestEmail && guestEmail.indexOf('@') > 0) {
+      sendConfirmationEmail(guestEmail, params.name.trim());
+    }
+
     return jsonResponse({ result: 'success', message: 'RSVP received!' });
 
   } catch (error) {
@@ -215,4 +221,41 @@ function jsonResponse(data) {
 
 function doGet() {
   return jsonResponse({ result: 'ok', message: 'RSVP endpoint is active.' });
+}
+
+/**
+ * Send RSVP confirmation email to attending guests.
+ * @param {string} email
+ * @param {string} name
+ */
+function sendConfirmationEmail(email, name) {
+  var subject = 'RSVP Confirmed — Minchi & David\'s Wedding';
+  var htmlBody = '<!DOCTYPE html><html><body style="font-family: Georgia, serif; max-width: 500px; margin: 0 auto; padding: 20px; color: #333;">'
+    + '<div style="text-align: center; padding: 30px 20px;">'
+    + '<h1 style="font-family: Georgia, serif; font-size: 28px; font-weight: normal; color: #333; margin-bottom: 5px;">Thank You, ' + name + '</h1>'
+    + '<p style="font-size: 16px; color: #555; margin-top: 10px;">So happy you\'ll be joining us</p>'
+    + '<p style="font-size: 14px; color: #555; letter-spacing: 1px;">很開心這一天有您相伴</p>'
+    + '<hr style="border: none; border-top: 1px solid #ddd; max-width: 100px; margin: 25px auto;">'
+    + '<p style="font-size: 18px; font-weight: bold; margin-bottom: 5px;">November 29, 2026 · Sunday</p>'
+    + '<p style="font-size: 14px; letter-spacing: 1px; color: #555; margin-top: 0;">2026.11.29 週日</p>'
+    + '<p style="font-size: 16px; font-weight: bold; margin-bottom: 2px;">11:30 AM</p>'
+    + '<hr style="border: none; border-top: 1px solid #ddd; max-width: 100px; margin: 25px auto;">'
+    + '<p style="font-size: 16px; font-weight: bold; margin-bottom: 2px;">Taipei Marriott Hotel</p>'
+    + '<p style="font-size: 14px; letter-spacing: 1px; color: #555; margin-top: 0;">台北萬豪酒店</p>'
+    + '<p style="font-size: 13px; color: #777;">No.199 Lequn 2nd Road, ZhongShan District, Taipei</p>'
+    + '<p style="font-size: 13px; color: #777; letter-spacing: 1px;">台北市中山區樂群二路199號</p>'
+    + '<a href="https://maps.google.com/?q=Taipei+Marriott+Hotel" target="_blank" style="display: inline-block; margin-top: 10px; padding: 8px 20px; color: #b8976a; text-decoration: none; font-size: 13px;">View on Google Maps</a>'
+    + '<hr style="border: none; border-top: 1px solid #ddd; max-width: 100px; margin: 25px auto;">'
+    + '<p style="font-size: 14px; color: #555;">Semi-formal attire is warmly encouraged.</p>'
+    + '<p style="font-size: 13px; color: #555; letter-spacing: 1px;">歡迎以半正式風格服裝出席</p>'
+    + '<hr style="border: none; border-top: 1px solid #ddd; max-width: 100px; margin: 25px auto;">'
+    + '<p style="font-family: Georgia, serif; font-size: 22px; color: #333; margin-top: 20px;"><em>Minchi &amp; David</em></p>'
+    + '</div>'
+    + '</body></html>';
+
+  try {
+    GmailApp.sendEmail(email, subject, '', { htmlBody: htmlBody });
+  } catch (err) {
+    console.error('Failed to send email to ' + email + ': ' + err.message);
+  }
 }
