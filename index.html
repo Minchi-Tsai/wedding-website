@@ -388,54 +388,65 @@
                 </section>
 
                 <!-- RSVP Section -->
-                <section class="my-0 pb-0 pt-3 position-relative overflow-hidden" id="rsvp">
-                    <img src="./assets/images/placeholder.webp" data-src="./assets/images/rsvp-bg.jpeg" alt="bg" class="position-absolute top-0 start-0" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.2; z-index: 0; mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);">
-                    <div class="container position-relative" style="z-index: 1;">
-                        <div class="rounded-5 shadow p-3 mb-2" style="backdrop-filter: blur(8px); background: rgba(var(--bs-body-bg-rgb, 255,255,255), 0.35);">
-                            <h2 class="font-esthetic text-center mt-2 mb-4" style="font-size: 2.25rem;">RSVP</h2>
+                <section class="my-0 pb-3 pt-3 position-relative overflow-hidden" id="rsvp">
+                    <img src="./assets/images/placeholder.webp" data-src="./assets/images/rsvp-bg.jpeg" alt="bg" class="position-absolute top-0 start-0" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.25; z-index: 0; mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);">
+                    <div class="container position-relative px-4" style="z-index: 1;">
+                        <h2 class="font-esthetic text-center mt-2 mb-4" style="font-size: 2.25rem;">RSVP</h2>
 
-                            <div class="mb-3">
-                                <label for="form-name" class="form-label my-1"><i class="fa-solid fa-person me-2"></i>Name</label>
-                                <input dir="auto" type="text" class="form-control shadow-sm rounded-4" id="form-name" minlength="2" maxlength="50" placeholder="Your name" autocomplete="name" data-offline-disabled="false">
-                            </div>
+                        <style>
+                            .rsvp-input {
+                                background: rgba(255,255,255,0.3) !important;
+                                backdrop-filter: blur(4px);
+                                border: 1px solid #b8976a !important;
+                                color: inherit !important;
+                            }
+                            .rsvp-input::placeholder { color: rgba(0,0,0,0.4) !important; }
+                            .rsvp-input:focus { box-shadow: 0 0 0 0.2rem rgba(184,151,106,0.3) !important; }
+                            html[data-bs-theme="dark"] .rsvp-input { background: rgba(0,0,0,0.3) !important; }
+                            html[data-bs-theme="dark"] .rsvp-input::placeholder { color: rgba(255,255,255,0.4) !important; }
+                        </style>
 
-                            <div class="mb-3">
-                                <label for="form-email" class="form-label my-1"><i class="fa-solid fa-envelope me-2"></i>Email</label>
-                                <input type="email" class="form-control shadow-sm rounded-4" id="form-email" placeholder="your@email.com (optional)" autocomplete="email" data-offline-disabled="false">
-                            </div>
+                        <div class="mb-3">
+                            <label for="form-name" class="form-label my-1"><i class="fa-solid fa-person me-2"></i>Name</label>
+                            <input dir="auto" type="text" class="form-control rounded-4 rsvp-input" id="form-name" minlength="2" maxlength="50" placeholder="Your name" autocomplete="name" data-offline-disabled="false">
+                        </div>
 
-                            <div class="mb-3">
-                                <label for="form-presence" class="form-label my-1"><i class="fa-solid fa-person-circle-question me-2"></i>Attendance</label>
-                                <select class="form-select shadow-sm rounded-4" id="form-presence" autocomplete="off" data-offline-disabled="false">
-                                    <option value="0" selected>Select attendance</option>
-                                    <option value="1">&#9989; Will attend</option>
-                                    <option value="2">&#10060; Unable to attend</option>
-                                </select>
-                            </div>
+                        <div class="mb-3">
+                            <label for="form-email" class="form-label my-1"><i class="fa-solid fa-envelope me-2"></i>Email</label>
+                            <input type="email" class="form-control rounded-4 rsvp-input" id="form-email" placeholder="your@email.com (optional)" autocomplete="email" data-offline-disabled="false">
+                        </div>
 
-                            <div class="mb-3">
-                                <label for="form-guest-count" class="form-label my-1"><i class="fa-solid fa-users me-2"></i>Number of guests</label>
-                                <input type="number" class="form-control shadow-sm rounded-4" id="form-guest-count" min="1" max="10" value="1" autocomplete="off" data-offline-disabled="false">
-                            </div>
+                        <div class="mb-3">
+                            <label for="form-presence" class="form-label my-1"><i class="fa-solid fa-person-circle-question me-2"></i>Attendance</label>
+                            <select class="form-select rounded-4 rsvp-input" id="form-presence" autocomplete="off" data-offline-disabled="false">
+                                <option value="0" selected>Select attendance</option>
+                                <option value="1">&#9989; Will attend</option>
+                                <option value="2">&#10060; Unable to attend</option>
+                            </select>
+                        </div>
 
-                            <div class="mb-3">
-                                <label for="form-message" class="form-label my-1"><i class="fa-solid fa-comment me-2"></i>Message (optional)</label>
-                                <textarea dir="auto" class="form-control shadow-sm rounded-4" id="form-message" rows="3" maxlength="500" placeholder="Wishes for the couple..." autocomplete="off" data-offline-disabled="false"></textarea>
-                            </div>
+                        <div class="mb-3">
+                            <label for="form-guest-count" class="form-label my-1"><i class="fa-solid fa-users me-2"></i>Number of guests</label>
+                            <input type="number" class="form-control rounded-4 rsvp-input" id="form-guest-count" min="1" max="10" value="1" autocomplete="off" data-offline-disabled="false">
+                        </div>
 
-                            <!-- Honeypot field — hidden from real users, bots fill it -->
-                            <div style="position: absolute; left: -9999px;" aria-hidden="true">
-                                <label for="form-website">Website</label>
-                                <input type="text" id="form-website" name="website" tabindex="-1" autocomplete="off">
-                            </div>
+                        <div class="mb-3">
+                            <label for="form-message" class="form-label my-1"><i class="fa-solid fa-comment me-2"></i>Message (optional)</label>
+                            <textarea dir="auto" class="form-control rounded-4 rsvp-input" id="form-message" rows="3" maxlength="500" placeholder="Wishes for the couple..." autocomplete="off" data-offline-disabled="false"></textarea>
+                        </div>
 
-                            <div id="rsvp-alert"></div>
+                        <!-- Honeypot field — hidden from real users, bots fill it -->
+                        <div style="position: absolute; left: -9999px;" aria-hidden="true">
+                            <label for="form-website">Website</label>
+                            <input type="text" id="form-website" name="website" tabindex="-1" autocomplete="off">
+                        </div>
 
-                            <div class="d-grid mt-3">
-                                <button class="btn btn-sm rounded-4 shadow m-1" style="background-color: #b8976a; border-color: #b8976a; color: #fff;" onclick="undangan.rsvp.send(this)" data-offline-disabled="false">
-                                    <i class="fa-solid fa-paper-plane me-2"></i>Send RSVP
-                                </button>
-                            </div>
+                        <div id="rsvp-alert"></div>
+
+                        <div class="d-grid mt-3">
+                            <button class="btn btn-sm rounded-4 shadow m-1" style="background-color: #b8976a; border-color: #b8976a; color: #fff;" onclick="undangan.rsvp.send(this)" data-offline-disabled="false">
+                                <i class="fa-solid fa-paper-plane me-2"></i>Send RSVP
+                            </button>
                         </div>
                     </div>
                 </section>
