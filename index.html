@@ -428,12 +428,13 @@
                                     document.getElementById('attending-fields').classList.toggle('d-none', v !== '1');
                                     document.getElementById('attending-message').classList.toggle('d-none', v !== '1');
                                     document.getElementById('not-attending-message').classList.toggle('d-none', v !== '2');
+                                    document.getElementById('rsvp-submit').classList.toggle('d-none', v === '0');
                                 });
                             </script>
                         </div>
 
                         <!-- Fields only shown when attending -->
-                        <div id="attending-fields">
+                        <div id="attending-fields" class="d-none">
                             <div class="mb-3">
                                 <label for="form-guest-count" class="form-label my-1"><i class="fa-solid fa-users me-2"></i>Guests attending <span style="font-size: 0.85rem;">出席人數</span></label>
                                 <select class="form-select rounded-4 rsvp-input" id="form-guest-count" autocomplete="off" data-offline-disabled="false">
@@ -501,7 +502,7 @@
 
                         <div id="rsvp-alert"></div>
 
-                        <div class="d-grid mt-3">
+                        <div id="rsvp-submit" class="d-grid mt-3 d-none">
                             <button class="btn btn-sm rounded-4 shadow m-1" style="background-color: #b8976a; border-color: #b8976a; color: #fff;" onclick="undangan.rsvp.send(this)" data-offline-disabled="false">
                                 <i class="fa-solid fa-paper-plane me-2"></i>Send RSVP 送出回覆
                             </button>
