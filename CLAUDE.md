@@ -14,9 +14,14 @@ If broader spreadsheet functionality is ever needed, create a dedicated Google a
 
 ## Typography — Chinese & English Sizing
 
-Chinese characters render larger than English when using the Sacramento cursive font (which only covers Latin). When mixing Chinese and English in the same heading or line:
+Chinese characters render larger than English when using the Sacramento cursive font (which only covers Latin).
 
-- Wrap Chinese text in a `<span>` with a smaller `font-size` (~60% of the English size)
-- Example: English at `2rem` → Chinese at `1.2rem`
-- This applies everywhere Chinese appears alongside `font-esthetic` (Sacramento) headings
-- Standalone Chinese text (addresses, subtitles) at their own size is fine
+Rules:
+- **Never** put Chinese text inside `font-esthetic` (Sacramento) elements — it looks wrong
+- Chinese text should use **regular Josefin Sans** with `letter-spacing: 0.1rem` for slight spacing
+- Place Chinese on a **separate line** below the English Sacramento heading (use `<p>` not `<span>`)
+- Chinese font size should be ~60% of the English heading size
+- Example: English `<h1>` at `2.25rem` → Chinese `<p>` at `1rem` with `letter-spacing: 0.1rem`
+- No "/" separator between English and Chinese text
+- This applies to all headings, labels, dropdown options, and placeholders across the entire site
+- Standalone Chinese text (addresses, venue info) at their own size is fine
