@@ -408,6 +408,8 @@
                             select.rsvp-input { font-size: 0.85rem !important; }
                             html[data-bs-theme="dark"] .rsvp-input { background: rgba(0,0,0,0.3) !important; }
                             html[data-bs-theme="dark"] .rsvp-input::placeholder { color: rgba(255,255,255,0.4) !important; }
+                            .rsvp-conditional { max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.4s ease, opacity 0.3s ease; }
+                            .rsvp-conditional.show { max-height: 800px; opacity: 1; }
                         </style>
 
                         <div class="mb-3">
@@ -425,16 +427,16 @@
                             <script>
                                 document.getElementById('form-presence').addEventListener('change', function() {
                                     var v = this.value;
-                                    document.getElementById('attending-fields').classList.toggle('d-none', v !== '1');
-                                    document.getElementById('attending-message').classList.toggle('d-none', v !== '1');
-                                    document.getElementById('not-attending-message').classList.toggle('d-none', v !== '2');
-                                    document.getElementById('rsvp-submit').classList.toggle('d-none', v === '0');
+                                    document.getElementById('attending-fields').classList.toggle('show', v === '1');
+                                    document.getElementById('attending-message').classList.toggle('show', v === '1');
+                                    document.getElementById('not-attending-message').classList.toggle('show', v === '2');
+                                    document.getElementById('rsvp-submit').classList.toggle('show', v !== '0');
                                 });
                             </script>
                         </div>
 
                         <!-- Fields only shown when attending -->
-                        <div id="attending-fields" class="d-none">
+                        <div id="attending-fields" class="rsvp-conditional">
                             <div class="mb-3">
                                 <label for="form-guest-count" class="form-label my-1"><i class="fa-solid fa-users me-2"></i>Guests attending <span style="font-size: 0.85rem;">出席人數</span></label>
                                 <select class="form-select rounded-4 rsvp-input" id="form-guest-count" autocomplete="off" data-offline-disabled="false">
@@ -456,26 +458,23 @@
                                 <script>
                                     document.getElementById('form-invitation-type').addEventListener('change', function() {
                                         var v = this.value;
-                                        var details = document.getElementById('invitation-details');
-                                        var email = document.getElementById('field-email');
-                                        var addr = document.getElementById('field-address');
-                                        details.classList.toggle('d-none', !v || v === 'none');
-                                        email.classList.toggle('d-none', v !== 'email' && v !== 'both');
-                                        addr.classList.toggle('d-none', v !== 'mail' && v !== 'both');
+                                        document.getElementById('invitation-details').classList.toggle('show', v && v !== 'none');
+                                        document.getElementById('field-email').classList.toggle('show', v === 'email' || v === 'both');
+                                        document.getElementById('field-address').classList.toggle('show', v === 'mail' || v === 'both');
                                     });
                                 </script>
                             </div>
 
-                            <div id="invitation-details" class="mb-3 d-none">
+                            <div id="invitation-details" class="mb-3 rsvp-conditional">
                                 <label class="form-label my-1"><i class="fa-solid fa-circle-info me-2"></i>Invitation delivery details <span style="font-size: 0.85rem;">喜帖寄送資訊</span></label>
                                 <p class="mb-2" style="font-size: 0.8rem; opacity: 0.7;">Please fill in the information needed for your invitation preference. <span style="font-size: 0.75rem;">請依照您選擇的喜帖寄送方式填寫所需資訊。</span></p>
 
-                                <div id="field-email" class="mb-2 d-none">
+                                <div id="field-email" class="mb-2 rsvp-conditional">
                                     <label for="form-email" class="form-label my-1" style="font-size: 0.9rem;">Email address <span style="font-size: 0.8rem;">電子信箱</span></label>
                                     <input type="email" class="form-control rounded-4 rsvp-input" id="form-email" placeholder="your@email.com" autocomplete="email" data-offline-disabled="false">
                                 </div>
 
-                                <div id="field-address" class="mb-2 d-none">
+                                <div id="field-address" class="mb-2 rsvp-conditional">
                                     <label for="form-address" class="form-label my-1" style="font-size: 0.9rem;">Mailing address <span style="font-size: 0.8rem;">收件地址</span></label>
                                     <input type="text" class="form-control rounded-4 rsvp-input" id="form-address" placeholder="Mailing address / 郵寄地址" autocomplete="off" data-offline-disabled="false">
                                 </div>
@@ -483,13 +482,13 @@
                         </div>
 
                         <!-- Message shown when attending (inside attending-fields already shows) -->
-                        <div id="attending-message" class="mb-3 d-none">
+                        <div id="attending-message" class="mb-3 rsvp-conditional">
                             <label for="form-message" class="form-label my-1"><i class="fa-solid fa-comment me-2"></i>Message optional <span style="font-size: 0.85rem;">祝福留言（選填）</span></label>
                             <textarea dir="auto" class="form-control rounded-4 rsvp-input" id="form-message" rows="3" maxlength="500" placeholder="Wishes for the couple... 給新人的祝福..." autocomplete="off" data-offline-disabled="false"></textarea>
                         </div>
 
                         <!-- Message shown when not attending -->
-                        <div id="not-attending-message" class="mb-3 d-none">
+                        <div id="not-attending-message" class="mb-3 rsvp-conditional">
                             <label for="form-message-decline" class="form-label my-1"><i class="fa-solid fa-comment me-2"></i>Message optional <span style="font-size: 0.85rem;">祝福留言（選填）</span></label>
                             <textarea dir="auto" class="form-control rounded-4 rsvp-input" id="form-message-decline" rows="3" maxlength="500" placeholder="Wishes for the couple... 給新人的祝福..." autocomplete="off" data-offline-disabled="false"></textarea>
                         </div>
@@ -502,7 +501,7 @@
 
                         <div id="rsvp-alert"></div>
 
-                        <div id="rsvp-submit" class="d-grid mt-3 d-none">
+                        <div id="rsvp-submit" class="d-grid mt-3 rsvp-conditional">
                             <button class="btn btn-sm rounded-4 shadow m-1" style="background-color: #b8976a; border-color: #b8976a; color: #fff;" onclick="undangan.rsvp.send(this)" data-offline-disabled="false">
                                 <i class="fa-solid fa-paper-plane me-2"></i>Send RSVP 送出回覆
                             </button>
