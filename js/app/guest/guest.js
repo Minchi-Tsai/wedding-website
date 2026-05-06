@@ -299,11 +299,12 @@ export const guest = (() => {
 
             const calHtml = `
                 <p class="mb-1 mt-3" style="font-size: 0.85rem;"><strong>Add to your calendar:</strong></p>
-                <div class="d-flex flex-wrap justify-content-center gap-3" style="font-size: 0.85rem;">
+                <div class="d-flex justify-content-center gap-3 mb-1" style="font-size: 0.85rem;">
                     <a href="${googleUrl.toString()}" target="_blank" style="color: #b8976a; text-decoration: none;"><i class="fa-brands fa-google me-1"></i>Google</a>
                     <span style="opacity: 0.3;">·</span>
                     <a href="${icsHref}" target="_blank" style="color: #b8976a; text-decoration: none;"><i class="fa-brands fa-apple me-1"></i>Apple</a>
-                    <span style="opacity: 0.3;">·</span>
+                </div>
+                <div class="d-flex justify-content-center gap-3" style="font-size: 0.85rem;">
                     <a href="${icsHref}" target="_blank" style="color: #b8976a; text-decoration: none;"><i class="fa-brands fa-microsoft me-1"></i>Outlook</a>
                     <span style="opacity: 0.3;">·</span>
                     <a href="${yahooUrl}" target="_blank" style="color: #b8976a; text-decoration: none;"><i class="fa-brands fa-yahoo me-1"></i>Yahoo</a>
