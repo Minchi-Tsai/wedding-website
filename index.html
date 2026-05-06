@@ -415,13 +415,16 @@
                         <div class="mb-3">
                             <label for="form-presence" class="form-label my-1"><i class="fa-solid fa-person-circle-question me-2"></i>Attendance <span style="font-size: 0.85rem;">是否出席</span></label>
                             <select class="form-select rounded-4 rsvp-input" id="form-presence" autocomplete="off" data-offline-disabled="false">
-                                <option value="1" selected>Yes, I'd love to be there! 我很期待參加！</option>
+                                <option value="0" selected>Select 請選擇</option>
+                                <option value="1">Yes, I'd love to be there! 我很期待參加！</option>
                                 <option value="2">Sorry, I'm unable to attend 很遺憾無法出席</option>
                             </select>
                             <script>
                                 document.getElementById('form-presence').addEventListener('change', function() {
-                                    var attending = this.value === '1';
-                                    document.getElementById('attending-fields').classList.toggle('d-none', !attending);
+                                    var v = this.value;
+                                    document.getElementById('attending-fields').classList.toggle('d-none', v !== '1');
+                                    document.getElementById('attending-message').classList.toggle('d-none', v !== '1');
+                                    document.getElementById('not-attending-message').classList.toggle('d-none', v !== '2');
                                 });
                             </script>
                         </div>
@@ -475,9 +478,16 @@
                             </div>
                         </div>
 
-                        <div class="mb-3">
+                        <!-- Message shown when attending (inside attending-fields already shows) -->
+                        <div id="attending-message" class="mb-3 d-none">
                             <label for="form-message" class="form-label my-1"><i class="fa-solid fa-comment me-2"></i>Message optional <span style="font-size: 0.85rem;">祝福留言（選填）</span></label>
-                            <textarea dir="auto" class="form-control rounded-4 rsvp-input" id="form-message" rows="3" maxlength="500" placeholder="Wishes for the couple... / 給新人的祝福..." autocomplete="off" data-offline-disabled="false"></textarea>
+                            <textarea dir="auto" class="form-control rounded-4 rsvp-input" id="form-message" rows="3" maxlength="500" placeholder="Wishes for the couple... 給新人的祝福..." autocomplete="off" data-offline-disabled="false"></textarea>
+                        </div>
+
+                        <!-- Message shown when not attending -->
+                        <div id="not-attending-message" class="mb-3 d-none">
+                            <label for="form-message-decline" class="form-label my-1"><i class="fa-solid fa-comment me-2"></i>Message optional <span style="font-size: 0.85rem;">祝福留言（選填）</span></label>
+                            <textarea dir="auto" class="form-control rounded-4 rsvp-input" id="form-message-decline" rows="3" maxlength="500" placeholder="Wishes for the couple... 給新人的祝福..." autocomplete="off" data-offline-disabled="false"></textarea>
                         </div>
 
                         <!-- Honeypot field — hidden from real users, bots fill it -->

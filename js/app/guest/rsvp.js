@@ -40,7 +40,8 @@ export const rsvp = (() => {
         const invitationType = document.getElementById('form-invitation-type');
         const email = document.getElementById('form-email');
         const address = document.getElementById('form-address');
-        const message = document.getElementById('form-message');
+        const isAttending = presence && presence.value === '1';
+        const message = isAttending ? document.getElementById('form-message') : document.getElementById('form-message-decline');
         const honeypot = document.getElementById('form-website');
         const alertWrapper = document.getElementById('rsvp-alert');
 
