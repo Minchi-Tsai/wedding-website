@@ -79,15 +79,10 @@ export const rsvp = (() => {
         }
 
         // Disable form
-        const btn = util.disableButton(button);
+        const btn = util.disableButton(button, 'Sending... 送出中...', true);
         [name, presence, guestCount, invitationType, email, address, message].forEach((el) => {
             if (el) el.disabled = true;
         });
-
-        alertWrapper.innerHTML = alertMarkup('info', lang
-            .on('zh-tw', '<i class="fa-solid fa-spinner fa-spin me-2"></i><strong>請稍候！</strong> 正在送出您的回覆...')
-            .on('en', '<i class="fa-solid fa-spinner fa-spin me-2"></i><strong>Just a moment!</strong> Sending your RSVP...')
-            .get());
 
         try {
             // Get reCAPTCHA token if available
