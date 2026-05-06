@@ -238,14 +238,14 @@ function sendConfirmationEmail(email, name) {
     + '<p style="font-size: 18px; color: #333; margin-bottom: 10px;">Hi ' + name + ',</p>'
     // Title
     + '<h1 style="font-size: 20px; font-weight: normal; color: #333; margin-bottom: 2px; margin-top: 25px;">Your RSVP is Confirmed</h1>'
-    + '<p style="font-size: 13px; color: #555; letter-spacing: 1px; margin-top: 0;">已確認您的出席</p>'
+    + '<p style="font-size: 15px; color: #555; letter-spacing: 1px; margin-top: 0;">已確認您的出席</p>'
     + hr
     // Date & Time
     + '<p style="font-size: 16px; font-weight: bold; margin-bottom: 3px;">2026.11.29・<span style="font-size: 13px; letter-spacing: 1px;">週日</span></p>'
     + '<p style="font-size: 15px; font-weight: bold; margin-top: 10px; margin-bottom: 5px;">11:30 AM</p>'
     // Venue
     + '<p style="font-size: 15px; font-weight: bold; margin-top: 15px; margin-bottom: 2px;"><a href="https://maps.google.com/?q=Taipei+Marriott+Hotel" target="_blank" style="color: #b8976a; text-decoration: none;">Taipei Marriott Hotel</a></p>'
-    + '<p style="font-size: 13px; letter-spacing: 1px; color: #555; margin-top: 0;">台北萬豪酒店</p>'
+    + '<p style="font-size: 14px; letter-spacing: 1px; color: #555; margin-top: 0;">台北萬豪酒店</p>'
     // Website link
     + '<p style="margin-top: 15px;"><a href="https://minchi-tsai.github.io/wedding-website/" target="_blank" style="color: #b8976a; text-decoration: none; font-size: 12px; opacity: 0.7;">View Details  查看婚禮資訊</a></p>'
     + hr
@@ -256,7 +256,7 @@ function sendConfirmationEmail(email, name) {
     // Footer
     + '<div style="text-align: center; padding: 25px 20px; margin-top: 10px; background-color: #f5f0eb;">'
     + '<p style="font-size: 13px; color: #555; margin-bottom: 5px;">Thank you for being part of this special chapter in our lives.</p>'
-    + '<p style="font-size: 12px; color: #555; letter-spacing: 1px; margin-top: 0;">謝謝您陪伴我們走進人生的新篇章。</p>'
+    + '<p style="font-size: 13px; color: #555; letter-spacing: 1px; margin-top: 0;">謝謝您陪伴我們走進人生的新篇章。</p>'
     + '</div>'
     + '</body></html>';
 
