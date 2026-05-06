@@ -348,12 +348,7 @@ export const guest = (() => {
         modalImageClick();
         buildCalendarLinks();
 
-        if (information.has('presence')) {
-            const presenceEl = document.getElementById('form-presence');
-            if (presenceEl) {
-                presenceEl.value = information.get('presence') ? '1' : '2';
-            }
-        }
+        // Don't restore previous attendance — always start fresh at "Select"
 
         if (information.get('info')) {
             document.getElementById('information')?.remove();
