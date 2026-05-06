@@ -145,9 +145,11 @@
                 </section>
 
                 <!-- Wedding Date & Events -->
-                <section class="bg-white-black pb-2 position-relative overflow-hidden d-flex align-items-center" id="wedding-date" style="min-height: 100vh;">
+                <section class="bg-white-black position-relative overflow-hidden d-flex flex-column" id="wedding-date" style="min-height: 100vh;">
                     <img src="./assets/images/placeholder.webp" data-src="./assets/images/wedding-day-bg.jpeg?v=4" alt="bg" class="position-absolute top-0 start-0" style="width: 100%; height: 100%; object-fit: cover; object-position: center 70%; opacity: 0.15; z-index: 0; mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);">
-                    <div class="container text-center position-relative" style="z-index: 1;">
+
+                    <!-- Top content -->
+                    <div class="container text-center position-relative pt-4" style="z-index: 1;">
                         <h2 class="font-esthetic py-4 m-0" style="font-size: 2.25rem;">Wedding Day</h2>
                         <p class="m-0 mb-3" style="font-size: 1.15rem;">2026.11.29 Sun <span style="font-size: 0.95rem; letter-spacing: 0.1rem;">週日</span></p>
 
@@ -174,8 +176,14 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="py-2" data-aos="fade-down" data-aos-duration="1500" style="margin-top: 8rem;">
+                    <!-- Spacer pushes venue to bottom -->
+                    <div class="flex-grow-1"></div>
+
+                    <!-- Venue info at bottom -->
+                    <div class="container text-center position-relative pb-4" style="z-index: 1;">
+                        <div class="py-2" data-aos="fade-down" data-aos-duration="1500">
                             <p class="fw-bold mb-0" style="font-size: 1rem;"><i class="fa-solid fa-location-dot me-2"></i>Taipei Marriott Hotel</p>
                             <p class="mb-1" style="font-size: 0.85rem; letter-spacing: 0.1rem;">台北萬豪酒店</p>
                             <p class="mb-0" style="font-size: 0.85rem;">No.199 Lequn 2nd Road, ZhongShan District, Taipei</p>
