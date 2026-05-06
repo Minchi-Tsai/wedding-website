@@ -200,9 +200,9 @@ function doPost(e) {
       guestSheet.getRange(match.row, RESPONSE_COL).setValue(responseValue);
     }
 
-    // Send confirmation email to attending guests with email
-    var guestEmail = (params.email || '').trim();
-    if (attendance === 'yes' && guestEmail && guestEmail.indexOf('@') > 0) {
+    // Send confirmation email to attending guests with valid email
+    var guestEmail = params.email ? String(params.email).trim() : '';
+    if (attendance === 'yes' && guestEmail.length > 0 && guestEmail.indexOf('@') > 0) {
       sendConfirmationEmail(guestEmail, params.name.trim());
     }
 
