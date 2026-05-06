@@ -78,14 +78,10 @@ export const rsvp = (() => {
             return;
         }
 
-        // Check email/address if invitation type requires it
+        // Check address if paper invitation requested
         if (isAttending && invitationType) {
             const v = invitationType.value;
-            if ((v === 'email' || v === 'both') && email && !email.value.trim()) {
-                alertWrapper.innerHTML = alertMarkup('warning', 'Please enter your email address.<br><span style="font-size: 0.85rem; letter-spacing: 0.1rem;">請填寫電子信箱</span>');
-                return;
-            }
-            if ((v === 'mail' || v === 'both') && address && !address.value.trim()) {
+            if (v === 'yes-paper' && address && !address.value.trim()) {
                 alertWrapper.innerHTML = alertMarkup('warning', 'Please enter your mailing address.<br><span style="font-size: 0.85rem; letter-spacing: 0.1rem;">請填寫收件地址</span>');
                 return;
             }
