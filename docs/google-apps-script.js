@@ -256,7 +256,7 @@ function sendConfirmationEmail(email, name) {
     // Footer
     + '<div style="text-align: center; padding: 25px 20px; margin-top: 10px; background-color: #f5f0eb;">'
     + '<p style="font-size: 13px; color: #555; margin-bottom: 5px;">Thank you for being part of this special chapter in our lives.</p>'
-    + '<p style="font-size: 13px; color: #555; letter-spacing: 1px; margin-top: 0;">謝謝您陪伴我們走進人生的新篇章。</p>'
+    + '<p style="font-size: 12px; color: #555; letter-spacing: 1px; margin-top: 0;">謝謝您陪伴我們走進人生的新篇章。</p>'
     + '</div>'
     + '</body></html>';
 
