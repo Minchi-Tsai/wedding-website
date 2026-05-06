@@ -237,7 +237,7 @@ function sendConfirmationEmail(email, name) {
     // Dear [Name]
     + '<p style="font-size: 18px; color: #333; margin-bottom: 10px;">Hi ' + name + ',</p>'
     // Title
-    + '<h1 style="font-size: 20px; font-weight: normal; color: #333; margin-bottom: 2px; margin-top: 25px;">Your RSVP is Confirmed</h1>'
+    + '<h1 style="font-size: 19px; font-weight: normal; color: #333; margin-bottom: 2px; margin-top: 25px;">Your RSVP is Confirmed</h1>'
     + '<p style="font-size: 15px; color: #555; letter-spacing: 1px; margin-top: 0;">已確認您的出席</p>'
     + hr
     // Date & Time
