@@ -45,6 +45,17 @@ export const rsvp = (() => {
         const honeypot = document.getElementById('form-website');
         const alertWrapper = document.getElementById('rsvp-alert');
 
+        // Check if already submitted on this device
+        if (information.get('submitted')) {
+            const updateMsg = lang
+                .on('zh-tw', '您已經回覆過了，確定要更新您的回覆嗎？')
+                .on('en', 'You have already submitted your RSVP. Would you like to update your response?')
+                .get();
+            if (!window.confirm(updateMsg)) {
+                return;
+            }
+        }
+
         // Honeypot check — bots fill hidden fields
         if (honeypot && honeypot.value.length > 0) {
             alertWrapper.innerHTML = alertMarkup('success', lang
@@ -107,6 +118,7 @@ export const rsvp = (() => {
                 alertWrapper.innerHTML = '';
                 information.set('name', name.value.trim());
                 information.set('presence', presence ? presence.value === '1' : true);
+                information.set('submitted', true);
 
                 // Toggle modal content based on attendance
                 const isAttending = presence && presence.value === '1';
