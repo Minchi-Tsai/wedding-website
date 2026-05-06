@@ -235,7 +235,7 @@ function sendConfirmationEmail(email, name) {
     + '<body style="font-family: Georgia, serif; max-width: 500px; margin: 0 auto; padding: 20px; color: #333;">'
     + '<div style="text-align: center; padding: 30px 20px;">'
     // Dear [Name]
-    + '<p style="font-size: 15px; color: #333; margin-bottom: 10px;">Hi ' + name + ',</p>'
+    + '<p style="font-size: 18px; color: #333; margin-bottom: 10px;">Hi ' + name + ',</p>'
     // Title
     + '<h1 style="font-size: 20px; font-weight: normal; color: #333; margin-bottom: 2px; margin-top: 25px;">Your RSVP is Confirmed</h1>'
     + '<p style="font-size: 13px; color: #555; letter-spacing: 1px; margin-top: 0;">已確認您的出席</p>'
@@ -250,8 +250,8 @@ function sendConfirmationEmail(email, name) {
     + '<p style="margin-top: 15px;"><a href="https://minchi-tsai.github.io/wedding-website/" target="_blank" style="color: #b8976a; text-decoration: none; font-size: 12px; opacity: 0.7;">View Details  查看婚禮資訊</a></p>'
     + hr
     // Signature
-    + '<p style="font-family: Georgia, serif; font-size: 22px; font-style: italic; color: #333; margin-top: 20px; margin-bottom: 0;">Minchi &amp; David</p>'
-    + '<p style="font-size: 14px; letter-spacing: 1px; color: #555; margin-top: 5px;">旻淇 &amp; 大為</p>'
+    + '<p style="font-family: Georgia, serif; font-size: 20px; font-style: italic; color: #333; margin-top: 20px; margin-bottom: 0;">Minchi &amp; David</p>'
+    + '<p style="font-size: 16px; letter-spacing: 1px; color: #555; margin-top: 5px;">旻淇 &amp; 大為</p>'
     + '</div>'
     // Footer
     + '<div style="text-align: center; padding: 25px 20px; margin-top: 10px; background-color: #f5f0eb;">'
