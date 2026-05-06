@@ -299,16 +299,16 @@ export const guest = (() => {
 
             const calHtml = `
                 <div class="d-flex flex-column gap-2 mt-3">
-                    <a href="${googleUrl.toString()}" target="_blank" class="btn btn-outline-auto btn-sm rounded-4 shadow-sm">
+                    <a href="${googleUrl.toString()}" target="_blank" class="btn btn-sm rounded-4" style="border: 1px solid #b8976a; color: #b8976a;">
                         <i class="fa-brands fa-google me-2"></i>Google Calendar
                     </a>
-                    <a href="${icsHref}" target="_blank" class="btn btn-outline-auto btn-sm rounded-4 shadow-sm">
+                    <a href="${icsHref}" target="_blank" class="btn btn-sm rounded-4" style="border: 1px solid #b8976a; color: #b8976a;">
                         <i class="fa-brands fa-apple me-2"></i>Apple / iCal
                     </a>
-                    <a href="${icsHref}" target="_blank" class="btn btn-outline-auto btn-sm rounded-4 shadow-sm">
+                    <a href="${icsHref}" target="_blank" class="btn btn-sm rounded-4" style="border: 1px solid #b8976a; color: #b8976a;">
                         <i class="fa-brands fa-microsoft me-2"></i>Outlook
                     </a>
-                    <a href="${yahooUrl}" target="_blank" class="btn btn-outline-auto btn-sm rounded-4 shadow-sm">
+                    <a href="${yahooUrl}" target="_blank" class="btn btn-sm rounded-4" style="border: 1px solid #b8976a; color: #b8976a;">
                         <i class="fa-brands fa-yahoo me-2"></i>Yahoo Calendar
                     </a>
                 </div>
