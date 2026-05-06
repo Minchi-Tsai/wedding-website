@@ -298,7 +298,8 @@ export const guest = (() => {
             ].join(''));
 
             const calHtml = `
-                <div class="d-flex flex-wrap justify-content-center gap-3 mt-3" style="font-size: 0.85rem;">
+                <p class="mb-1 mt-3" style="font-size: 0.85rem;"><strong>Add to your calendar:</strong></p>
+                <div class="d-flex flex-wrap justify-content-center gap-3" style="font-size: 0.85rem;">
                     <a href="${googleUrl.toString()}" target="_blank" style="color: #b8976a; text-decoration: none;"><i class="fa-brands fa-google me-1"></i>Google</a>
                     <span style="opacity: 0.3;">·</span>
                     <a href="${icsHref}" target="_blank" style="color: #b8976a; text-decoration: none;"><i class="fa-brands fa-apple me-1"></i>Apple</a>
