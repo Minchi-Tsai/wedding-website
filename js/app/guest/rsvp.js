@@ -108,7 +108,11 @@ export const rsvp = (() => {
                 information.set('name', name.value.trim());
                 information.set('presence', presence ? presence.value === '1' : true);
 
-                // Show thank you modal with calendar links
+                // Toggle modal content based on attendance
+                const isAttending = presence && presence.value === '1';
+                document.getElementById('modal-attending').classList.toggle('d-none', !isAttending);
+                document.getElementById('modal-declined').classList.toggle('d-none', isAttending);
+
                 bs.modal('rsvp-success-modal').show();
             }
         } catch {
