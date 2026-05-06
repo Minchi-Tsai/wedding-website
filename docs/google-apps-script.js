@@ -235,8 +235,8 @@ function sendConfirmationEmail(email, name) {
     + '<body style="font-family: Georgia, serif; max-width: 500px; margin: 0 auto; padding: 20px; color: #333;">'
     + '<div style="text-align: center; padding: 30px 20px;">'
     // Dear [Name]
-    + '<p style="font-size: 15px; color: #333; margin-bottom: 2px;">Dear ' + name + ',</p>'
-    + '<p style="font-size: 13px; color: #555; letter-spacing: 1px; margin-top: 0;">親愛的 ' + name + '，</p>'
+    + '<p style="font-size: 15px; color: #333; margin-bottom: 2px;">Hi ' + name + ',</p>'
+    + '<p style="font-size: 13px; color: #555; letter-spacing: 1px; margin-top: 0;">嗨 ' + name + '，</p>'
     // Title
     + '<h1 style="font-size: 20px; font-weight: normal; color: #333; margin-bottom: 2px; margin-top: 25px;">Your RSVP is Confirmed</h1>'
     + '<p style="font-size: 13px; color: #555; letter-spacing: 1px; margin-top: 0;">您的出席回覆已確認</p>'
