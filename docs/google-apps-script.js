@@ -235,34 +235,34 @@ function sendConfirmationEmail(email, name) {
     + '<body style="font-family: Georgia, serif; max-width: 500px; margin: 0 auto; padding: 20px; color: #333;">'
     + '<div style="text-align: center; padding: 30px 20px;">'
     // Dear [Name]
-    + '<p style="font-size: 16px; color: #333; margin-bottom: 2px;">Dear ' + name + ',</p>'
-    + '<p style="font-size: 14px; color: #555; letter-spacing: 1px; margin-top: 0;">親愛的 ' + name + '，</p>'
+    + '<p style="font-size: 15px; color: #333; margin-bottom: 2px;">Dear ' + name + ',</p>'
+    + '<p style="font-size: 13px; color: #555; letter-spacing: 1px; margin-top: 0;">親愛的 ' + name + '，</p>'
     // Title
-    + '<h1 style="font-size: 22px; font-weight: normal; color: #333; margin-bottom: 2px; margin-top: 20px;">Your RSVP is Confirmed</h1>'
-    + '<p style="font-size: 14px; color: #555; letter-spacing: 1px; margin-top: 0;">您的出席回覆已確認</p>'
+    + '<h1 style="font-size: 20px; font-weight: normal; color: #333; margin-bottom: 2px; margin-top: 25px;">Your RSVP is Confirmed</h1>'
+    + '<p style="font-size: 13px; color: #555; letter-spacing: 1px; margin-top: 0;">您的出席回覆已確認</p>'
     + hr
     // Warm note
-    + '<p style="font-size: 15px; color: #555; margin-bottom: 5px;">We\'re so happy you\'ll be celebrating with us.</p>'
-    + '<p style="font-size: 14px; color: #555; letter-spacing: 1px; margin-top: 0;">很開心這一天有您相伴。</p>'
+    + '<p style="font-size: 14px; color: #555; margin-bottom: 5px;">We\'re so happy you\'ll be celebrating with us.</p>'
+    + '<p style="font-size: 13px; color: #555; letter-spacing: 1px; margin-top: 0;">很開心這一天有您相伴。</p>'
     + hr
     // Date & Time
-    + '<p style="font-size: 17px; font-weight: bold; margin-bottom: 3px;">2026.11.29・<span style="font-size: 14px; letter-spacing: 1px;">週日</span></p>'
-    + '<p style="font-size: 16px; font-weight: bold; margin-top: 15px; margin-bottom: 5px;">11:30 AM</p>'
+    + '<p style="font-size: 16px; font-weight: bold; margin-bottom: 3px;">2026.11.29・<span style="font-size: 13px; letter-spacing: 1px;">週日</span></p>'
+    + '<p style="font-size: 15px; font-weight: bold; margin-top: 10px; margin-bottom: 5px;">11:30 AM</p>'
     // Venue
-    + '<p style="font-size: 16px; font-weight: bold; margin-top: 15px; margin-bottom: 2px;"><a href="https://maps.google.com/?q=Taipei+Marriott+Hotel" target="_blank" style="color: #b8976a; text-decoration: none;">Taipei Marriott Hotel</a></p>'
-    + '<p style="font-size: 14px; letter-spacing: 1px; color: #555; margin-top: 0;">台北萬豪酒店</p>'
+    + '<p style="font-size: 15px; font-weight: bold; margin-top: 15px; margin-bottom: 2px;"><a href="https://maps.google.com/?q=Taipei+Marriott+Hotel" target="_blank" style="color: #b8976a; text-decoration: none;">Taipei Marriott Hotel</a></p>'
+    + '<p style="font-size: 13px; letter-spacing: 1px; color: #555; margin-top: 0;">台北萬豪酒店</p>'
     + hr
     // Website link
-    + '<a href="https://minchi-tsai.github.io/wedding-website/" target="_blank" style="color: #b8976a; text-decoration: none; font-size: 13px;">View Wedding Details ｜ 查看婚禮資訊</a>'
+    + '<a href="https://minchi-tsai.github.io/wedding-website/" target="_blank" style="color: #b8976a; text-decoration: none; font-size: 13px;">View Details 查看婚禮資訊</a>'
     + hr
     // Signature
-    + '<p style="font-family: Georgia, serif; font-size: 24px; font-style: italic; color: #333; margin-top: 20px; margin-bottom: 0;">Minchi &amp; David</p>'
-    + '<p style="font-size: 16px; letter-spacing: 1px; color: #555; margin-top: 5px;">旻淇 &amp; 大為</p>'
+    + '<p style="font-family: Georgia, serif; font-size: 22px; font-style: italic; color: #333; margin-top: 20px; margin-bottom: 0;">Minchi &amp; David</p>'
+    + '<p style="font-size: 14px; letter-spacing: 1px; color: #555; margin-top: 5px;">旻淇 &amp; 大為</p>'
     + '</div>'
     // Footer blessing
     + '<div style="text-align: center; padding: 25px 20px; margin-top: 10px; background-color: #f5f0eb;">'
-    + '<p style="font-size: 14px; color: #555; letter-spacing: 1px; margin-bottom: 5px;">誠摯期待您的到來，陪伴我們一同見證愛與幸福的美好時刻</p>'
-    + '<p style="font-size: 13px; color: #777; margin-top: 0;">We sincerely look forward to having you with us as we celebrate this beautiful moment of love and happiness.</p>'
+    + '<p style="font-size: 13px; color: #555; letter-spacing: 1px; margin-bottom: 5px;">誠摯期待您的到來，陪伴我們一同見證愛與幸福的美好時刻</p>'
+    + '<p style="font-size: 12px; color: #777; margin-top: 0;">We sincerely look forward to having you with us as we celebrate this beautiful moment of love and happiness.</p>'
     + '</div>'
     + '</body></html>';
 
