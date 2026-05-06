@@ -242,8 +242,6 @@ function sendConfirmationEmail(email, name) {
     + '<hr style="border: none; border-top: 1px solid #ddd; max-width: 100px; margin: 25px auto;">'
     + '<p style="font-size: 16px; font-weight: bold; margin-bottom: 2px;"><a href="https://maps.google.com/?q=Taipei+Marriott+Hotel" target="_blank" style="color: #b8976a; text-decoration: none;">Taipei Marriott Hotel</a></p>'
     + '<p style="font-size: 14px; letter-spacing: 1px; color: #555; margin-top: 0;">台北萬豪酒店</p>'
-    + '<span style="font-size: 13px; color: #777;">No.199 Lequn 2nd Road, ZhongShan District, Taipei</span><br>'
-    + '<span style="font-size: 13px; color: #777; letter-spacing: 1px;">台北市中山區樂群二路199號</span>'
     + '<hr style="border: none; border-top: 1px solid #ddd; max-width: 100px; margin: 25px auto;">'
     + '<p style="font-family: Georgia, serif; font-size: 24px; font-style: italic; color: #333; margin-top: 20px; margin-bottom: 0;">Minchi &amp; David</p>'
     + '<p style="font-size: 12px; letter-spacing: 1px; color: #555; margin-top: 5px;">旻淇 &amp; 大為</p>'
