@@ -79,6 +79,18 @@ export const audio = (() => {
 
         music.addEventListener('offline', pause);
         music.addEventListener('click', () => isPlay ? pause() : play());
+
+        // Auto-pause when user leaves the page (tab switch, minimize, lock phone)
+        let wasPlaying = false;
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden && isPlay) {
+                wasPlaying = true;
+                pause();
+            } else if (!document.hidden && wasPlaying) {
+                wasPlaying = false;
+                play();
+            }
+        });
     };
 
     /**
