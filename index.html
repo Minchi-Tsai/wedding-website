@@ -52,8 +52,12 @@
     <!-- Dependencies JS -->
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha256-5P1JGBOIxI7FBAvT/mb1fCnI5n/NhQKzNUuW7Hq0fMc=" crossorigin="anonymous"></script>
     <script>
-        // Clear all browser caches to force fresh content
-        if (window.caches) { caches.keys().then(function(names) { names.forEach(function(name) { caches.delete(name); }); }); }
+        // One-time cache + localStorage clear (remove this after all users have loaded fresh)
+        if (!sessionStorage.getItem('v5')) {
+            sessionStorage.setItem('v5', '1');
+            localStorage.clear();
+            if (window.caches) { caches.keys().then(function(n) { n.forEach(function(k) { caches.delete(k); }); }); }
+        }
     </script>
     <script src="./dist/guest.js?v=4"></script>
 
