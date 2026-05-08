@@ -246,37 +246,38 @@
                 </section>
 
                 <!-- Love Story -->
-                <section class="bg-white-black position-relative overflow-hidden d-flex flex-column align-items-center" style="min-height: 100vh;">
-                    <img src="./assets/images/placeholder.webp" data-src="./assets/images/our-story.jpeg" alt="our story bg" class="position-absolute top-0 start-0" style="width: 100%; height: 100%; object-fit: cover; object-position: center 30%; opacity: 0.15; z-index: 0; mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);">
+                <section class="bg-light-dark pt-2 pb-4 d-flex align-items-center" style="min-height: 100vh;">
+                    <div class="container">
+                        <div class="bg-theme-auto p-3" style="border-radius: 2rem; box-shadow: 0 4px 24px rgba(0,0,0,0.08);">
+                            <h2 class="font-esthetic text-center py-2 mb-2" style="font-size: 2.125rem;">Our Story</h2>
 
-                    <div class="container text-center position-relative pt-4" style="z-index: 1;">
-                        <h2 class="font-esthetic py-4 m-0" style="font-size: 2.25rem;">Our Story</h2>
-                    </div>
+                            <!-- Story photo -->
+                            <img src="./assets/images/placeholder.webp" data-src="./assets/images/our-story.jpeg" alt="our story" class="w-100 shadow-sm mb-2" onclick="undangan.guest.modal(this)" style="cursor: pointer; object-fit: cover; max-height: 15rem; border-radius: 1.5rem;">
 
-                    <div class="container position-relative" style="z-index: 1;">
-                        <div class="position-relative">
-                            <div class="position-absolute d-flex justify-content-center align-items-center top-50 start-50 translate-middle w-100 h-100 z-3" style="background-color: unset;">
-                                <button class="btn btn-sm rounded-4 shadow-sm" style="background-color: #b8976a; color: #fff; border: none;" onclick="undangan.guest.showStory(this.parentNode)"><i class="fa-solid fa-heart fa-bounce me-2" style="color: #e74c3c;"></i>Read Our Story</button>
-                            </div>
-
-                            <div class="overflow-y-scroll overflow-x-hidden p-3 with-scrollbar" style="height: 18rem;">
-                                <div class="row">
-                                    <div class="col-auto position-relative">
-                                        <p class="position-relative d-flex justify-content-center align-items-center bg-theme-auto border border-secondary border-2 opacity-100 rounded-circle m-0 p-0 z-1" style="width: 2rem; height: 2rem;">1</p>
-                                        <hr class="position-absolute top-0 start-50 translate-middle-x border border-secondary h-100 z-0 opacity-100 m-0 rounded-4 shadow-none">
-                                    </div>
-                                    <div class="col mt-1 mb-3 ps-0">
-                                        <p class="fw-bold mb-2">How We Met <span style="font-size: 0.85em; font-weight: normal; letter-spacing: 0.1rem;">我們怎麼認識的</span></p>
-                                        <p class="small mb-0">我們是在波士頓念碩士時認識的同學。<br>因為幾門人生很難的課，開始互相勉勵、互相鼓勵。（非抄作業，恩恩。）<br>後來也常常一起參加喵組團的滑雪行程，<br>在東岸的雪地裡慢慢熟了起來。</p>
-                                    </div>
+                            <div class="position-relative">
+                                <div class="position-absolute d-flex justify-content-center align-items-center top-50 start-50 translate-middle w-100 h-100 bg-overlay-auto z-3" style="opacity: 100%; background-color: unset;">
+                                    <button class="btn btn-sm rounded-4 shadow-sm" style="background-color: #b8976a; color: #fff; border: none;" onclick="undangan.guest.showStory(this.parentNode)"><i class="fa-solid fa-heart fa-bounce me-2" style="color: #e74c3c;"></i>Read Our Story</button>
                                 </div>
-                                <div class="row">
-                                    <div class="col-auto position-relative">
-                                        <p class="position-relative d-flex justify-content-center align-items-center bg-theme-auto border border-secondary border-2 opacity-100 rounded-circle m-0 p-0 z-1" style="width: 2rem; height: 2rem;">2</p>
+
+                                <div class="overflow-y-scroll overflow-x-hidden p-2 with-scrollbar" style="height: 15rem;">
+                                    <div class="row">
+                                        <div class="col-auto position-relative">
+                                            <p class="position-relative d-flex justify-content-center align-items-center bg-theme-auto border border-secondary border-2 opacity-100 rounded-circle m-0 p-0 z-1" style="width: 2rem; height: 2rem;">1</p>
+                                            <hr class="position-absolute top-0 start-50 translate-middle-x border border-secondary h-100 z-0 opacity-100 m-0 rounded-4 shadow-none">
+                                        </div>
+                                        <div class="col mt-1 mb-3 ps-0">
+                                            <p class="fw-bold mb-2">How We Met <span style="font-size: 0.85em; font-weight: normal; letter-spacing: 0.1rem;">我們怎麼認識的</span></p>
+                                            <p class="small mb-0">我們是在波士頓念碩士時認識的同學。<br>因為幾門人生很難的課，開始互相勉勵、互相鼓勵。（非抄作業，恩恩。）<br>後來也常常一起參加喵組團的滑雪行程，<br>在東岸的雪地裡慢慢熟了起來。</p>
+                                        </div>
                                     </div>
-                                    <div class="col mt-1 mb-3 ps-0">
-                                        <p class="fw-bold mb-2">How We Fell in Love <span style="font-size: 0.85em; font-weight: normal; letter-spacing: 0.1rem;">我們怎麼走到一起的</span></p>
-                                        <p class="small mb-0">女方美女積極參與男方帥哥規劃的各項美洲公路旅行。<br>男方則靠著 365 顆舒芙蕾連招，<br>以及 Six Flags 蝙蝠俠雲霄飛車等表現穩定加分。<br>於是，故事就這樣一路從美國東岸，<br>開到了台灣北部。</p>
+                                    <div class="row">
+                                        <div class="col-auto position-relative">
+                                            <p class="position-relative d-flex justify-content-center align-items-center bg-theme-auto border border-secondary border-2 opacity-100 rounded-circle m-0 p-0 z-1" style="width: 2rem; height: 2rem;">2</p>
+                                        </div>
+                                        <div class="col mt-1 mb-3 ps-0">
+                                            <p class="fw-bold mb-2">How We Fell in Love <span style="font-size: 0.85em; font-weight: normal; letter-spacing: 0.1rem;">我們怎麼走到一起的</span></p>
+                                            <p class="small mb-0">女方美女積極參與男方帥哥規劃的各項美洲公路旅行。<br>男方則靠著 365 顆舒芙蕾連招，<br>以及 Six Flags 蝙蝠俠雲霄飛車等表現穩定加分。<br>於是，故事就這樣一路從美國東岸，<br>開到了台灣北部。</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
