@@ -246,7 +246,9 @@
                 </section>
 
                 <!-- Love Story -->
-                <section class="bg-light-dark pt-2 pb-4 d-flex align-items-center" style="min-height: 100vh;">
+                <section class="bg-light-dark pt-2 pb-4 d-flex align-items-center position-relative" style="min-height: 100vh;">
+                    <!-- Fade-in gradient from previous section -->
+                    <div class="position-absolute top-0 start-0 w-100 bg-white-black" style="height: 6rem; mask-image: linear-gradient(to bottom, black, transparent); z-index: 0;"></div>
                     <div class="container">
                         <div class="bg-theme-auto p-3" style="border-radius: 2rem; box-shadow: 0 4px 24px rgba(0,0,0,0.08);">
                             <h2 class="font-esthetic text-center py-2 mb-2" style="font-size: 2.125rem;">Our Story</h2>
@@ -283,6 +285,8 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Fade-out gradient to next section -->
+                    <div class="position-absolute bottom-0 start-0 w-100 bg-white-black" style="height: 6rem; mask-image: linear-gradient(to top, black, transparent); z-index: 0;"></div>
                 </section>
 
                 <!-- Gallery -->
