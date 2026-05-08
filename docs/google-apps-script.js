@@ -242,7 +242,7 @@ function sendConfirmationEmail(email, name) {
     + hr
     // Date & Time
     + '<p style="font-size: 16px; font-weight: bold; margin-bottom: 3px;">2026.11.29・<span style="font-size: 13px; letter-spacing: 1px;">週日</span></p>'
-    + '<p style="font-size: 15px; font-weight: bold; margin-top: 10px; margin-bottom: 5px;">11:30 AM</p>'
+    + '<p style="font-size: 15px; font-weight: bold; margin-top: 10px; margin-bottom: 5px;">11:40 AM</p>'
     // Venue
     + '<p style="font-size: 15px; font-weight: bold; margin-top: 15px; margin-bottom: 2px;"><a href="https://maps.google.com/?q=Taipei+Marriott+Hotel" target="_blank" style="color: #b8976a; text-decoration: none;">Taipei Marriott Hotel</a></p>'
     + '<p style="font-size: 14px; letter-spacing: 1px; color: #555; margin-top: 0; margin-bottom: 2px;">台北萬豪酒店</p>'
