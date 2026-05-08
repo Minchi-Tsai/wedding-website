@@ -247,6 +247,8 @@ function sendConfirmationEmail(email, name) {
     + '<p style="font-size: 15px; font-weight: bold; margin-top: 15px; margin-bottom: 2px;"><a href="https://maps.google.com/?q=Taipei+Marriott+Hotel" target="_blank" style="color: #b8976a; text-decoration: none;">Taipei Marriott Hotel</a></p>'
     + '<p style="font-size: 14px; letter-spacing: 1px; color: #555; margin-top: 0; margin-bottom: 2px;">台北萬豪酒店</p>'
     + '<p style="font-size: 13px; color: #555; margin-top: 0;">36F <span style="letter-spacing: 1px;">寰宇廳</span></p>'
+    // Transportation card
+    + '<p style="margin-top: 20px;"><img src="cid:transportCard" alt="Transportation & Parking" style="max-width: 100%; border-radius: 8px;"></p>'
     // Website link
     + '<p style="margin-top: 15px;"><a href="https://minchi-tsai.github.io/wedding-website/" target="_blank" style="color: #b8976a; text-decoration: none; font-size: 12px; opacity: 0.7;">View Details  查看婚禮資訊</a></p>'
     + hr
@@ -262,7 +264,13 @@ function sendConfirmationEmail(email, name) {
     + '</body></html>';
 
   try {
-    GmailApp.sendEmail(email, subject, '', { htmlBody: htmlBody });
+    var transportBlob = UrlFetchApp.fetch(
+      'https://minchi-tsai.github.io/wedding-website/assets/images/transport-card.jpeg'
+    ).getBlob().setName('transport-card.jpeg');
+    GmailApp.sendEmail(email, subject, '', {
+      htmlBody: htmlBody,
+      inlineImages: { transportCard: transportBlob }
+    });
   } catch (err) {
     console.error('Failed to send email to ' + email + ': ' + err.message);
   }
